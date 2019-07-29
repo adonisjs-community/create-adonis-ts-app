@@ -65,8 +65,9 @@
   },
   "dependencies": {
     "@adonisjs/fold": "^6.1.2",
-    "@adonisjs/sink": "^2.0.9",
+    "@adonisjs/sink": "^2.0.11",
     "@poppinss/application": "^1.0.7",
+    "fs-extra": "^8.1.0",
     "kleur": "^3.0.3",
     "randomstring": "^1.1.5"
   },

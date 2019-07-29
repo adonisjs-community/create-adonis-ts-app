@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
 */
 
+import { ensureDirSync } from 'fs-extra'
 import { bgRed, red } from 'kleur'
 import { isAbsolute, join, basename } from 'path'
 import { Application } from '@poppinss/application'
@@ -26,6 +27,14 @@ export async function runTasks (projectRoot: string) {
   const application = new Application(projectRoot, {} as any, {}, {})
   const absPath = isAbsolute(projectRoot) ? projectRoot : join(process.cwd(), projectRoot)
 
+  /**
+   * Create directory if missing
+   */
+  ensureDirSync(absPath)
+
+  /**
+   * Ensure that directory is empty
+   */
   const isEmpty = isEmptyDir(absPath)
   if (!isEmpty) {
     console.log(bgRed(`Error`))

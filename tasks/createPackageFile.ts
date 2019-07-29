@@ -23,24 +23,31 @@ export default function createPackageFile (basePath: string, appName: string) {
   pkg.setScript('start', 'adonis serve --dev')
 
   /**
+   * Use yarn when executed as `yarn create`
+   */
+  if (process.env.npm_execpath && process.env.npm_execpath.includes('yarn')) {
+    pkg.yarn(true)
+  }
+
+  /**
    * Prod dependencies
    */
-  pkg.install({
-    '@adonisjs/core': 'latest',
-    '@adonisjs/fold': 'next',
-    'reflect-metadata': 'latest',
-  }, false)
+  pkg.install('@adonisjs/core', 'latest', false)
+  pkg.install('@adonisjs/fold', '6', false)
+  pkg.install('reflect-metadata', 'latest', false)
 
   /**
    * Dev dependencies
    */
-  pkg.install([
-    'typescript',
-    'youch',
-    'youch-terminal',
-    'pino-pretty',
-    'tslint',
-    'adonis-preset-ts',
-  ])
+  pkg.install('typescript')
+  pkg.install('youch')
+  pkg.install('youch-terminal')
+  pkg.install('pino-pretty')
+  pkg.install('tslint')
+  pkg.install('adonis-preset-ts')
+
+  /**
+   * Commit mutations
+   */
   pkg.commit()
 }
