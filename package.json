@@ -17,7 +17,7 @@
     "test": "node japaFile.js",
     "lint": "tslint --project tsconfig.json",
     "clean": "del build",
-    "compile": "npm run lint && npm run clean && tsc && copyfiles templates/* build",
+    "compile": "npm run lint && npm run clean && tsc && copyfiles \"templates/**/*.txt\" build",
     "build": "npm run compile",
     "commit": "git-cz",
     "release": "np",
@@ -65,7 +65,7 @@
   },
   "dependencies": {
     "@adonisjs/fold": "^6.1.2",
-    "@adonisjs/sink": "^2.0.11",
+    "@adonisjs/sink": "^2.0.12",
     "@poppinss/application": "^1.0.7",
     "fs-extra": "^8.1.0",
     "kleur": "^3.0.3",

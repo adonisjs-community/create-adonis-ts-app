@@ -27,7 +27,7 @@ export default function createPackageFile (basePath: string) {
     new TemplateFile(
       basePath,
       template,
-      join(__dirname, '..', '../templates', template.replace(/\.ts$/, '.txt')),
+      join(__dirname, '..', 'templates', template.replace(/\.ts$/, '.txt')),
     )
       .apply({})
       .commit()
