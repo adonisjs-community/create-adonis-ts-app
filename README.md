@@ -1,39 +1,17 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-## Table of contents
+<div align="center">
+  <img src="https://res.cloudinary.com/adonisjs/image/upload/q_100/v1564392111/adonis-banner_o9lunk.png" width="600px">
+</div>
 
-- [adonis-ts-boilerplate](#adonis-ts-boilerplate)
-  - [Change log](#change-log)
-  - [Contributing](#contributing)
-  - [Authors & License](#authors--license)
+<br />
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+# Create Adonis Typescript app
+The executable script to create a new AdonisJs project using `npx` or `yarn create`. Also the `adonis cli` will use this as a boilerplate.
 
-# adonis-ts-boilerplate
+# Usage
 
-[![circleci-image]][circleci-url]
-[![npm-image]][npm-url]
-![](https://img.shields.io/badge/Typescript-294E80.svg?style=for-the-badge&logo=typescript)
+```sh
+npx create-adonis-ts-app yardstick
 
-## Change log
-
-The change log can be found in the [CHANGELOG.md](CHANGELOG.md) file.
-
-## Contributing
-
-Everyone is welcome to contribute. Please go through the following guides, before getting started.
-
-1. [Contributing](https://adonisjs.com/contributing)
-2. [Code of conduct](https://adonisjs.com/code-of-conduct)
-
-
-## Authors & License
-[Harminder virk](https://github.com/Harminder virk) and [contributors](https://github.com/AdonisCommunity/adonis-ts-boilerplate/graphs/contributors).
-
-MIT License, see the included [MIT](LICENSE.md) file.
-
-[circleci-image]: https://img.shields.io/circleci/project/github/AdonisCommunity/adonis-ts-boilerplate/master.svg?style=for-the-badge&logo=circleci
-[circleci-url]: https://circleci.com/gh/AdonisCommunity/adonis-ts-boilerplate "circleci"
-
-[npm-image]: https://img.shields.io/npm/v/adonis-ts-boilerplate.svg?style=for-the-badge&logo=npm
-[npm-url]: https://npmjs.org/package/adonis-ts-boilerplate "npm"
+# yarn
+yarn create adonis-ts-app yardstick
+```
