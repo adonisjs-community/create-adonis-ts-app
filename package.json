@@ -1,0 +1,85 @@
+{
+  "name": "create-adonis-ts-app",
+  "version": "0.0.0",
+  "description": "Boilerplate to create a new AdonisJs typescript project",
+  "main": "build/index.js",
+  "files": [
+    "build/bin",
+    "build/tasks",
+    "build/templates",
+    "build/index.d.ts",
+    "build/index.js"
+  ],
+  "scripts": {
+    "postinstall": "node build/bin/run.js",
+    "mrm": "mrm --preset=@adonisjs/mrm-preset",
+    "pretest": "npm run lint",
+    "test": "node japaFile.js",
+    "prepublishOnly": "npm run build",
+    "lint": "tslint --project tsconfig.json",
+    "clean": "del build",
+    "compile": "npm run lint && npm run clean && tsc && copyfiles templates/* build",
+    "build": "npm run compile",
+    "commit": "git-cz"
+  },
+  "author": "virk,adonisjs",
+  "license": "MIT",
+  "devDependencies": {
+    "@adonisjs/mrm-preset": "^2.0.3",
+    "@types/node": "^12.6.8",
+    "commitizen": "^4.0.3",
+    "copyfiles": "^2.1.1",
+    "cz-conventional-changelog": "^3.0.2",
+    "del-cli": "^2.0.0",
+    "doctoc": "^1.4.0",
+    "husky": "^3.0.1",
+    "japa": "^2.0.10",
+    "mrm": "^1.2.2",
+    "pkg-ok": "^2.3.1",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.5.3"
+  },
+  "nyc": {
+    "exclude": [
+      "test"
+    ],
+    "extension": [
+      ".ts"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "doctoc README.md --title='## Table of contents' && git add README.md",
+      "commit-msg": "node ./node_modules/@adonisjs/mrm-preset/validateCommit/conventional/validate.js"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "bin": {
+    "create-adonis-ts-app": "build/bin/run.js"
+  },
+  "dependencies": {
+    "@adonisjs/fold": "^6.1.2",
+    "@adonisjs/sink": "^2.0.9",
+    "@poppinss/application": "^1.0.7",
+    "kleur": "^3.0.3",
+    "randomstring": "^1.1.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdonisCommunity/adonis-ts-boilerplate.git"
+  },
+  "keywords": [
+    "adonisjs",
+    "typescript"
+  ],
+  "bugs": {
+    "url": "https://github.com/AdonisCommunity/adonis-ts-boilerplate/issues"
+  },
+  "homepage": "https://github.com/AdonisCommunity/adonis-ts-boilerplate#readme"
+}
