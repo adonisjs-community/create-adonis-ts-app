@@ -19,6 +19,7 @@ import createGitIgnore from './tasks/createGitIgnore'
 import createTsConfig from './tasks/createTsConfig'
 import createTsLint from './tasks/createTslint'
 import copyTemplates from './tasks/copyTemplates'
+import createEditorConfig from './tasks/createEditorConfig'
 
 /**
  * Running all the tasks to create a new project.
@@ -62,6 +63,11 @@ export async function runTasks (projectRoot: string) {
    * Creating the `.gitignore` file
    */
   createGitIgnore(absPath)
+
+  /**
+   * Creating the `.editorconfig` file
+   */
+  createEditorConfig(absPath)
 
   /**
    * Creating `tsconfig.json` file
