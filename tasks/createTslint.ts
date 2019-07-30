@@ -14,7 +14,7 @@ import { JsonFile } from '@adonisjs/sink'
  */
 export default function createTsLint (projectRoot: string) {
   const tslint = new JsonFile(projectRoot, 'tslint.json')
-  tslint.set('extends', 'adonis-preset-ts/tsconfig')
+  tslint.set('extends', 'adonis-preset-ts/tslint')
   tslint.set('rules', {})
   tslint.commit()
 }

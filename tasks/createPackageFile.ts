@@ -44,6 +44,7 @@ export default function createPackageFile (basePath: string, appName: string) {
   pkg.install('youch-terminal')
   pkg.install('pino-pretty')
   pkg.install('tslint')
+  pkg.install('tslint-eslint-rules')
   pkg.install('adonis-preset-ts')
 
   /**
