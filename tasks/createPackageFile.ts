@@ -34,6 +34,7 @@ export default function createPackageFile (basePath: string, appName: string) {
    */
   pkg.install('@adonisjs/core', 'latest', false)
   pkg.install('@adonisjs/fold', '6', false)
+  pkg.install('@adonisjs/bodyparser', '3', false)
   pkg.install('reflect-metadata', 'latest', false)
 
   /**

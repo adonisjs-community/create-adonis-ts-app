@@ -21,6 +21,7 @@ import MiddlewareStore from '@ioc:Adonis/Core/MiddlewareStore'
 |
 */
 MiddlewareStore.register([
+  'Adonis/Addons/BodyParserMiddleware'
 ])
 
 /*

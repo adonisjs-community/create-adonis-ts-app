@@ -19,10 +19,9 @@ const templates = [
 ]
 
 /**
- * Creates the `package.json` file in the project root and installs
- * required dependencies
+ * Copies templates to project directory
  */
-export default function createPackageFile (basePath: string) {
+export default function copyTemplates (basePath: string) {
   templates.forEach((template) => {
     new TemplateFile(
       basePath,

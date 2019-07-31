@@ -19,7 +19,10 @@ export default function createTsConfig (projectRoot: string) {
   tsconfig.set('exclude', ['node_modules', 'build'])
   tsconfig.set('extends', './node_modules/adonis-preset-ts/tsconfig')
   tsconfig.set('compilerOptions', {
-    types: ['@adonisjs/core'],
+    types: [
+      '@adonisjs/core',
+      '@adonisjs/bodyparser',
+    ],
     paths: {
       'App/*': ['./app/*'],
       'Contracts/*': ['./contracts/*'],
