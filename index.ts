@@ -7,8 +7,8 @@
  * file that was distributed with this source code.
 */
 
-import { ensureDirSync } from 'fs-extra'
 import { bgRed, red } from 'kleur'
+import { ensureDirSync } from 'fs-extra'
 import { isAbsolute, join, basename } from 'path'
 import { Application } from '@poppinss/application'
 import { executeInstructions, isEmptyDir } from '@adonisjs/sink'
@@ -38,60 +38,67 @@ export async function runTasks (projectRoot: string) {
    */
   const isEmpty = isEmptyDir(absPath)
   if (!isEmpty) {
-    console.log(bgRed(`Error`))
-    console.log(red(`- Cannot overwrite existing contents in {${projectRoot}} directory`))
-    console.log(red(`- Make sure that {${projectRoot}} directory is empty`))
-    return
+    console.error(bgRed(`Error`))
+    console.error(red(`- Cannot overwrite existing contents in {${projectRoot}} directory`))
+    console.error(red(`- Make sure that {${projectRoot}} directory is empty`))
+    process.exit(1)
   }
 
-  /**
-   * Pulling the project name from the project root path
-   */
-  const projectName = basename(absPath)
+  try {
+    /**
+     * Pulling the project name from the project root path
+     */
+    const projectName = basename(absPath)
 
-  /**
-   * Creating the `.adonisrc.json` file
-   */
-  createRcFile(absPath, application)
+    /**
+     * Creating the `.adonisrc.json` file
+     */
+    createRcFile(absPath, application)
 
-  /**
-   * Creating the `.env` file
-   */
-  createEnvFile(absPath)
+    /**
+     * Creating the `.env` file
+     */
+    createEnvFile(absPath)
 
-  /**
-   * Creating the `.gitignore` file
-   */
-  createGitIgnore(absPath)
+    /**
+     * Creating the `.gitignore` file
+     */
+    createGitIgnore(absPath)
 
-  /**
-   * Creating the `.editorconfig` file
-   */
-  createEditorConfig(absPath)
+    /**
+     * Creating the `.editorconfig` file
+     */
+    createEditorConfig(absPath)
 
-  /**
-   * Creating `tsconfig.json` file
-   */
-  createTsConfig(absPath)
+    /**
+     * Creating `tsconfig.json` file
+     */
+    createTsConfig(absPath)
 
-  /**
-   * Creating `tslint.json` file
-   */
-  createTsLint(absPath)
+    /**
+     * Creating `tslint.json` file
+     */
+    createTsLint(absPath)
 
-  /**
-   * Creating `package.json` file and install required dependencies
-   */
-  createPackageFile(absPath, projectName)
+    /**
+     * Creating `package.json` file and install required dependencies
+     */
+    createPackageFile(absPath, projectName)
 
-  /**
-   * Copy application templates
-   */
-  copyTemplates(absPath)
+    /**
+     * Copy application templates
+     */
+    copyTemplates(absPath)
 
-  /**
-   * Executing instructions from `@adonisjs/core`. Please check the package
-   * repo to see the actions executed there
-   */
-  await executeInstructions('@adonisjs/core', absPath, application)
+    /**
+     * Executing instructions from `@adonisjs/core` and `@adonisjs/bodyparser`.
+     * Please check the packages repos to see the actions executed there.
+     */
+    await executeInstructions('@adonisjs/core', absPath, application)
+    await executeInstructions('@adonisjs/bodyparser', absPath, application)
+    process.exit(0)
+  } catch (error) {
+    console.error(error)
+    process.exit(1)
+  }
 }
