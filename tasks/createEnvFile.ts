@@ -19,7 +19,7 @@ export default function createEnvFile (basePath: string) {
   const env = new EnvFile(basePath)
 
   env.set('PORT', '3333')
-  env.set('HOST', '0.0.0')
+  env.set('HOST', '0.0.0.0')
   env.set('NODE_ENV', 'development')
   env.set('APP_KEY', randomstring.generate(32))
 
