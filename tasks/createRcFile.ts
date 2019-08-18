@@ -8,13 +8,14 @@
 */
 
 import { RcFile } from '@adonisjs/sink'
-import { ApplicationContract } from '@poppinss/application'
+import { TaskFn } from '../src/contracts'
+import { logCreateFile } from '../src/logger'
 
 /**
  * Creates the `.adonisrc.json` file in the project root
  */
-export default function createRcFile (basePath: string, application: ApplicationContract) {
-  const rcFile = new RcFile(basePath)
+const task: TaskFn = (absPath, application) => {
+  const rcFile = new RcFile(absPath)
 
   rcFile.setExceptionHandler('App/Exceptions/Handler')
   rcFile.setAutoload('App', 'app')
@@ -32,4 +33,7 @@ export default function createRcFile (basePath: string, application: Application
   rcFile.addCopyToBuildFile('.gitignore')
 
   rcFile.commit()
+  logCreateFile('.adonisrc.json')
 }
+
+export default task

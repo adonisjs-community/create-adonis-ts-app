@@ -8,12 +8,14 @@
 */
 
 import { LinesFile } from '@adonisjs/sink'
+import { TaskFn } from '../src/contracts'
+import { logCreateFile } from '../src/logger'
 
 /**
  * Creates `.gitignore` file inside the project root.
  */
-export default function createGitIgnore (basePath: string) {
-  const gitignore = new LinesFile(basePath, '.gitignore')
+const task: TaskFn = (absPath) => {
+  const gitignore = new LinesFile(absPath, '.gitignore')
 
   gitignore.add('node_modules')
   gitignore.add('build')
@@ -22,4 +24,7 @@ export default function createGitIgnore (basePath: string) {
   gitignore.add('.DS_STORE')
 
   gitignore.commit()
+  logCreateFile('.gitignore')
 }
+
+export default task

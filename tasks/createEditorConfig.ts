@@ -8,12 +8,14 @@
 */
 
 import { IniFile } from '@adonisjs/sink'
+import { TaskFn } from '../src/contracts'
+import { logCreateFile } from '../src/logger'
 
 /**
  * Creates `.editorconfig` inside the project root.
  */
-export default function createEditorConfig (basePath: string) {
-  const editorConfig = new IniFile(basePath, '.editorconfig')
+const task: TaskFn = (absPath) => {
+  const editorConfig = new IniFile(absPath, '.editorconfig')
 
   editorConfig.set('*', {
     indent_style: 'space',
@@ -33,4 +35,7 @@ export default function createEditorConfig (basePath: string) {
   })
 
   editorConfig.commit()
+  logCreateFile('.editorconfig')
 }
+
+export default task

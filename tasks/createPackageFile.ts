@@ -7,25 +7,33 @@
  * file that was distributed with this source code.
 */
 
+import * as ora from 'ora'
+import { basename } from 'path'
 import { PackageFile } from '@adonisjs/sink'
+
+import { TaskFn } from '../src/contracts'
+import { logCreateFile, logInstall, logError } from '../src/logger'
 
 /**
  * Creates the `package.json` file in the project root and installs
  * required dependencies
  */
-export default function createPackageFile (basePath: string, appName: string) {
-  const pkg = new PackageFile(basePath)
-  pkg.set('name', appName)
+const task: TaskFn = async (absPath) => {
+  const pkg = new PackageFile(absPath)
+
+  pkg.set('name', basename(absPath))
   pkg.set('version', '0.0.0')
   pkg.set('private', true)
 
   pkg.setScript('build', 'adonis build')
   pkg.setScript('start', 'adonis serve --dev')
 
+  const useYarn = process.env.npm_execpath && process.env.npm_execpath.includes('yarn')
+
   /**
    * Use yarn when executed as `yarn create`
    */
-  if (process.env.npm_execpath && process.env.npm_execpath.includes('yarn')) {
+  if (useYarn) {
     pkg.yarn(true)
   }
 
@@ -49,7 +57,31 @@ export default function createPackageFile (basePath: string, appName: string) {
   pkg.install('adonis-preset-ts')
 
   /**
+   * Displaying a spinner, since install packages takes
+   * a while
+   */
+  let spinner: ora.Ora | null = null
+  pkg.beforeInstall((list) => {
+    if (spinner) {
+      spinner.stopAndPersist()
+    }
+    spinner = ora({ interval: 120 })
+    logInstall(list, spinner)
+  })
+
+  /**
    * Commit mutations
    */
-  pkg.commit()
+  const response = await pkg.commitAsync()
+  spinner && spinner!.stopAndPersist()
+
+  if (response && response.status === 1) {
+    const errorMessage = useYarn ? 'yarn install failed' : 'npm install failed'
+    logError(errorMessage, response.stderr.toString().split('\n'))
+    throw new Error('Installation failed')
+  } else {
+    logCreateFile('package.json')
+  }
 }
+
+export default task

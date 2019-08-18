@@ -9,6 +9,8 @@
 
 import { join } from 'path'
 import { TemplateFile } from '@adonisjs/sink'
+import { TaskFn } from '../src/contracts'
+import { logCreateFile } from '../src/logger'
 
 const templates = [
   'server.ts',
@@ -21,14 +23,18 @@ const templates = [
 /**
  * Copies templates to project directory
  */
-export default function copyTemplates (basePath: string) {
+const task: TaskFn = (absPath) => {
   templates.forEach((template) => {
     new TemplateFile(
-      basePath,
+      absPath,
       template,
       join(__dirname, '..', 'templates', template.replace(/\.ts$/, '.txt')),
     )
       .apply({})
       .commit()
+
+    logCreateFile(template)
   })
 }
+
+export default task

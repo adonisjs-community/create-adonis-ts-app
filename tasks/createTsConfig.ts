@@ -8,12 +8,14 @@
 */
 
 import { JsonFile } from '@adonisjs/sink'
+import { TaskFn } from '../src/contracts'
+import { logCreateFile } from '../src/logger'
 
 /**
  * Creates `tsconfig.json` file
  */
-export default function createTsConfig (projectRoot: string) {
-  const tsconfig = new JsonFile(projectRoot, 'tsconfig.json')
+const task: TaskFn = (absPath) => {
+  const tsconfig = new JsonFile(absPath, 'tsconfig.json')
 
   tsconfig.set('include', ['**/*'])
   tsconfig.set('exclude', ['node_modules', 'build'])
@@ -30,4 +32,7 @@ export default function createTsConfig (projectRoot: string) {
   })
 
   tsconfig.commit()
+  logCreateFile('tsconfig.json')
 }
+
+export default task

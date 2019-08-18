@@ -8,13 +8,18 @@
 */
 
 import { JsonFile } from '@adonisjs/sink'
+import { TaskFn } from '../src/contracts'
+import { logCreateFile } from '../src/logger'
 
 /**
  * Creates `tslint.json` file
  */
-export default function createTsLint (projectRoot: string) {
-  const tslint = new JsonFile(projectRoot, 'tslint.json')
+const task: TaskFn = (absPath) => {
+  const tslint = new JsonFile(absPath, 'tslint.json')
   tslint.set('extends', 'adonis-preset-ts/tslint')
   tslint.set('rules', {})
   tslint.commit()
+  logCreateFile('tslint.json')
 }
+
+export default task

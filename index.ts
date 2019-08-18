@@ -7,98 +7,59 @@
  * file that was distributed with this source code.
 */
 
-import { bgRed, red } from 'kleur'
-import { ensureDirSync } from 'fs-extra'
-import { isAbsolute, join, basename } from 'path'
+import { red } from 'kleur'
+import { isAbsolute, join } from 'path'
+import { isEmptyDir } from '@adonisjs/sink'
 import { Application } from '@poppinss/application'
-import { executeInstructions, isEmptyDir } from '@adonisjs/sink'
-import createRcFile from './tasks/createRcFile'
-import createEnvFile from './tasks/createEnvFile'
-import createPackageFile from './tasks/createPackageFile'
-import createGitIgnore from './tasks/createGitIgnore'
-import createTsConfig from './tasks/createTsConfig'
-import createTsLint from './tasks/createTslint'
-import copyTemplates from './tasks/copyTemplates'
-import createEditorConfig from './tasks/createEditorConfig'
+import { ensureDirSync, removeSync } from 'fs-extra'
+
+import { tasks } from './tasks'
+import { logError } from './src/logger'
 
 /**
  * Running all the tasks to create a new project.
  */
-export async function runTasks (projectRoot: string) {
-  const application = new Application(projectRoot, {} as any, {}, {})
+export async function runTasks () {
+  const argv = process.argv.slice(2)
+  if (!argv.length) {
+    console.log(red('Project name is required to create a new app'))
+    return
+  }
+
+  const projectRoot = argv[0].trim()
+
+  /**
+   * If project root is not absolute, then we derive it from the current
+   * working directory
+   */
   const absPath = isAbsolute(projectRoot) ? projectRoot : join(process.cwd(), projectRoot)
 
   /**
-   * Create directory if missing
+   * Ensuring that defined path exists
    */
   ensureDirSync(absPath)
 
-  /**
-   * Ensure that directory is empty
-   */
-  const isEmpty = isEmptyDir(absPath)
-  if (!isEmpty) {
-    console.error(bgRed(`Error`))
-    console.error(red(`- Cannot overwrite existing contents in {${projectRoot}} directory`))
-    console.error(red(`- Make sure that {${projectRoot}} directory is empty`))
-    process.exit(1)
+  if (!isEmptyDir(absPath)) {
+    const errors = [
+      `Cannot overwrite contents of {${projectRoot}} directory.`,
+      'Make sure to define path to an empty directory',
+    ]
+
+    console.log(red(errors.join(' ')))
+    return
   }
 
-  try {
-    /**
-     * Pulling the project name from the project root path
-     */
-    const projectName = basename(absPath)
+  /**
+   * Creating application instance
+   */
+  const application = new Application(absPath, {} as any, {}, {})
 
-    /**
-     * Creating the `.adonisrc.json` file
-     */
-    createRcFile(absPath, application)
-
-    /**
-     * Creating the `.env` file
-     */
-    createEnvFile(absPath)
-
-    /**
-     * Creating the `.gitignore` file
-     */
-    createGitIgnore(absPath)
-
-    /**
-     * Creating the `.editorconfig` file
-     */
-    createEditorConfig(absPath)
-
-    /**
-     * Creating `tsconfig.json` file
-     */
-    createTsConfig(absPath)
-
-    /**
-     * Creating `tslint.json` file
-     */
-    createTsLint(absPath)
-
-    /**
-     * Creating `package.json` file and install required dependencies
-     */
-    createPackageFile(absPath, projectName)
-
-    /**
-     * Copy application templates
-     */
-    copyTemplates(absPath)
-
-    /**
-     * Executing instructions from `@adonisjs/core` and `@adonisjs/bodyparser`.
-     * Please check the packages repos to see the actions executed there.
-     */
-    await executeInstructions('@adonisjs/core', absPath, application)
-    await executeInstructions('@adonisjs/bodyparser', absPath, application)
-    process.exit(0)
-  } catch (error) {
-    console.error(error)
-    process.exit(1)
+  for (let task of tasks) {
+    try {
+      await task(absPath, application)
+    } catch (error) {
+      logError('Unable to create new project. Rolling back')
+      removeSync(absPath)
+    }
   }
 }
