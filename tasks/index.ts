@@ -15,6 +15,7 @@ import createTsConfig from './createTsConfig'
 import createTsLint from './createTslint'
 import copyTemplates from './copyTemplates'
 import createEditorConfig from './createEditorConfig'
+import executeInstructions from './executeInstructions'
 
 /**
  * An array of tasks to be executed in chronological order
@@ -28,4 +29,5 @@ export const tasks = [
   copyTemplates,
   createEditorConfig,
   createPackageFile,
+  executeInstructions,
 ]

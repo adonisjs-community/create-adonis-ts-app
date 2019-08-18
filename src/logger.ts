@@ -21,7 +21,7 @@ const width = cliWidth() - 13
  * Logging create file message
  */
 export function logCreateFile (filePath: string) {
-  console.log(`create  ${green(filePath)}`)
+  console.log(`  create  ${green(filePath)}`)
 }
 
 /**
@@ -58,7 +58,7 @@ export function logInstall (list: string[], spinner: Ora) {
     namedDependencies.push(`and ${outOfBounds} other${outOfBounds !== 1 ? 's' : ''}`)
   }
 
-  spinner.prefixText = `install ${yellow(namedDependencies.join(', '))}`
+  spinner.text = `install ${yellow(namedDependencies.join(', '))}`
   spinner.spinner = 'dots'
   spinner.color = 'gray'
   spinner.start()
@@ -68,10 +68,11 @@ export function logInstall (list: string[], spinner: Ora) {
  * Logging error
  */
 export function logError (message: string, stack?: string[]) {
-  console.log(bgRed(` ${message} `))
+  console.log('')
+  console.log(`  ${bgRed(` ${message} `)}`)
   if (stack) {
     stack.forEach((line) => {
-      console.log(`  ${red(line)}`)
+      console.log(`    ${red(line)}`)
     })
   }
 }
