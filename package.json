@@ -5,6 +5,7 @@
   "main": "build/index.js",
   "files": [
     "build/bin",
+    "build/src",
     "build/tasks",
     "build/templates",
     "build/index.d.ts",
