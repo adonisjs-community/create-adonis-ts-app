@@ -9,13 +9,13 @@
 
 import { Ora } from 'ora'
 import * as cliWidth from 'cli-width'
-import { green, yellow, red, bgRed } from 'kleur'
+import { green, yellow, red, bgRed, dim } from 'kleur'
 
 /**
  * Getting width of the stdout to put log messages
  * in one line
  */
-const width = cliWidth() - 13
+const width = cliWidth()
 
 /**
  * Logging create file message
@@ -27,9 +27,9 @@ export function logCreateFile (filePath: string) {
 /**
  * Log installing dependencies message
  */
-export function logInstall (list: string[], spinner: Ora) {
+export function logInstall (list: string[], spinner: Ora, dev: boolean) {
   const namedDependencies: string[] = []
-  let widthConsumed = 8
+  let widthConsumed = 17 + 15
 
   for (let dependency of list) {
     if ((widthConsumed + dependency.length + 2) > width) {
@@ -58,7 +58,7 @@ export function logInstall (list: string[], spinner: Ora) {
     namedDependencies.push(`and ${outOfBounds} other${outOfBounds !== 1 ? 's' : ''}`)
   }
 
-  spinner.text = `install ${yellow(namedDependencies.join(', '))}`
+  spinner.text = `install ${yellow(namedDependencies.join(', '))} ${dim(`${dev ? '[dev]' : '[prod]'}`)}`
   spinner.spinner = 'dots'
   spinner.color = 'gray'
   spinner.start()

@@ -61,12 +61,12 @@ const task: TaskFn = async (absPath) => {
    * a while
    */
   let spinner: ora.Ora | null = null
-  pkg.beforeInstall((list) => {
+  pkg.beforeInstall((list, dev) => {
     if (spinner) {
       spinner.stopAndPersist()
     }
     spinner = ora({ interval: 120 })
-    logInstall(list, spinner)
+    logInstall(list, spinner, dev)
   })
 
   /**
