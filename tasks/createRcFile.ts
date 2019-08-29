@@ -14,16 +14,12 @@ import { logCreateFile } from '../src/logger'
 /**
  * Creates the `.adonisrc.json` file in the project root
  */
-const task: TaskFn = (absPath, application) => {
+const task: TaskFn = (absPath) => {
   const rcFile = new RcFile(absPath)
 
   rcFile.setExceptionHandler('App/Exceptions/Handler')
   rcFile.setAutoload('App', 'app')
   rcFile.setAutoload('Contracts', 'contracts')
-
-  application.directoriesMap.forEach((value, key) => {
-    rcFile.setDirectory(key, value)
-  })
 
   rcFile.setPreload('start/routes')
   rcFile.setPreload('start/kernel')
