@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
 */
 
-import * as randomstring from 'randomstring'
+import randomstring from 'randomstring'
 import { EnvFile } from '@adonisjs/sink'
 import { TaskFn } from '../src/contracts'
 import { logCreateFile } from '../src/logger'

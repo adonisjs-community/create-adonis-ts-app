@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
 */
 
-import * as ora from 'ora'
+import ora from 'ora'
 import { basename } from 'path'
 import { PackageFile } from '@adonisjs/sink'
 
