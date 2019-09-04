@@ -1,6 +1,6 @@
 {
   "name": "create-adonis-ts-app",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Boilerplate to create a new AdonisJs typescript project",
   "main": "build/index.js",
   "files": [
