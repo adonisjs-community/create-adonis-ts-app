@@ -8,7 +8,7 @@
 */
 
 import { Ora } from 'ora'
-import * as cliWidth from 'cli-width'
+import cliWidth from 'cli-width'
 import { green, yellow, red, bgRed, dim } from 'kleur'
 
 /**
