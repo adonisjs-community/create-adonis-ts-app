@@ -44,6 +44,7 @@ const task: TaskFn = async (absPath) => {
   pkg.install('@adonisjs/fold', '6', false)
   pkg.install('@adonisjs/bodyparser', '3', false)
   pkg.install('reflect-metadata', 'latest', false)
+  pkg.install('proxy-addr', 'latest', false)
 
   /**
    * Dev dependencies
