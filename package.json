@@ -35,7 +35,7 @@
     "del-cli": "^2.0.0",
     "doctoc": "^1.4.0",
     "husky": "^3.0.5",
-    "japa": "^3.0.0",
+    "japa": "^3.0.1",
     "mrm": "^1.2.2",
     "np": "^5.0.3",
     "ts-node": "^8.3.0",
@@ -66,7 +66,7 @@
   },
   "dependencies": {
     "@adonisjs/fold": "^6.1.5",
-    "@adonisjs/sink": "^2.1.6",
+    "@adonisjs/sink": "^2.1.9",
     "@poppinss/application": "^1.0.10",
     "cli-width": "^2.2.0",
     "fs-extra": "^8.1.0",
