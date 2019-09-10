@@ -24,9 +24,9 @@ const task: TaskFn = (absPath) => {
   rcFile.setPreload('start/routes')
   rcFile.setPreload('start/kernel')
 
-  rcFile.addCopyToBuildFile('.env')
-  rcFile.addCopyToBuildFile('.adonisrc.json')
-  rcFile.addCopyToBuildFile('.gitignore')
+  rcFile.addMetaFile('.env')
+  rcFile.addMetaFile('.adonisrc.json')
+  rcFile.addMetaFile('.gitignore')
 
   rcFile.commit()
   logCreateFile('.adonisrc.json')
