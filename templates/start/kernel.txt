@@ -9,7 +9,7 @@
 |
 */
 
-import MiddlewareStore from '@ioc:Adonis/Core/MiddlewareStore'
+import Server from '@ioc:Adonis/Core/Server'
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ import MiddlewareStore from '@ioc:Adonis/Core/MiddlewareStore'
 | are defined for all HTTP requests.
 |
 */
-MiddlewareStore.register([
+Server.middleware.register([
   'Adonis/Addons/BodyParserMiddleware',
 ])
 
@@ -40,5 +40,5 @@ MiddlewareStore.register([
 | Route.get('dashboard', 'UserController.dashboard').middleware('auth')
 |
 */
-MiddlewareStore.registerNamed({
+Server.middleware.registerNamed({
 })
