@@ -18,7 +18,7 @@ import { logCreateFile, logInstall, logError } from '../src/logger'
  * Creates the `package.json` file in the project root and installs
  * required dependencies
  */
-const task: TaskFn = async (absPath) => {
+const task: TaskFn = async (absPath, _app, state) => {
   const pkg = new PackageFile(absPath)
 
   pkg.set('name', basename(absPath))
@@ -43,6 +43,15 @@ const task: TaskFn = async (absPath) => {
   pkg.install('@adonisjs/core', 'latest', false)
   pkg.install('@adonisjs/fold', '6', false)
   pkg.install('@adonisjs/bodyparser', '3', false)
+
+  /**
+   * Installing extra packages for traditional web app
+   */
+  if (state.boilerplate === 'web') {
+    pkg.install('@adonisjs/view', 'latest', false)
+    pkg.install('@adonisjs/session', '2', false)
+  }
+
   pkg.install('reflect-metadata', 'latest', false)
   pkg.install('proxy-addr', 'latest', false)
 

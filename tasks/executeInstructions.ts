@@ -14,10 +14,15 @@ import { logError } from '../src/logger'
 /**
  * Executes instructions on the installed packages
  */
-const task: TaskFn = async (absPath, application) => {
+const task: TaskFn = async (absPath, application, state) => {
   try {
     await executeInstructions('@adonisjs/core', absPath, application)
     await executeInstructions('@adonisjs/bodyparser', absPath, application)
+
+    if (state.boilerplate === 'web') {
+      await executeInstructions('@adonisjs/view', absPath, application)
+      await executeInstructions('@adonisjs/session', absPath, application)
+    }
   } catch (error) {
     const stack = error.stack.split('\n')
     logError(stack.shift(), stack)

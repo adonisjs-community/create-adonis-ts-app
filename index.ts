@@ -8,6 +8,7 @@
 */
 
 import { red } from 'kleur'
+import getops from 'getopts'
 import { isAbsolute, join } from 'path'
 import { isEmptyDir } from '@adonisjs/sink'
 import { Application } from '@poppinss/application'
@@ -15,18 +16,30 @@ import { ensureDirSync, removeSync } from 'fs-extra'
 
 import { tasks } from './tasks'
 import { logError } from './src/logger'
+import { CliState } from './src/contracts'
 
 /**
  * Running all the tasks to create a new project.
  */
 export async function runTasks () {
-  const argv = process.argv.slice(2)
-  if (!argv.length) {
+  const argv = getops(process.argv.slice(2), {
+    string: ['boilerplate'],
+  })
+
+  /**
+   * Ensure project name is defined
+   */
+  if (!argv._.length) {
     console.log(red('Project name is required to create a new app'))
     return
   }
 
-  const projectRoot = argv[0].trim()
+  let state: CliState = {
+    boilerplate: argv.boilerplate || 'web',
+    db: !!argv.db,
+  }
+
+  const projectRoot = argv._[0].trim()
 
   /**
    * If project root is not absolute, then we derive it from the current
@@ -56,7 +69,7 @@ export async function runTasks () {
 
   for (let task of tasks) {
     try {
-      await task(absPath, application)
+      await task(absPath, application, state)
     } catch (error) {
       logError('Unable to create new project. Rolling back')
       removeSync(absPath)

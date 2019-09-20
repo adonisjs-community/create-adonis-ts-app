@@ -15,3 +15,10 @@ npx create-adonis-ts-app yardstick
 # yarn
 yarn create adonis-ts-app yardstick
 ```
+
+## Customizing project
+The default project is created for a traditional web app. However, you can define a different `boilerplate` using the `boilerplate` flag.
+
+```
+npx create-adonis-ts-app yardstick --boilerplate=api
+```

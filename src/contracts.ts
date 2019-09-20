@@ -8,4 +8,13 @@
 */
 
 import { ApplicationContract } from '@poppinss/application'
-export type TaskFn = (absPath: string, application: ApplicationContract) => void
+export type TaskFn = (
+  absPath: string,
+  application: ApplicationContract,
+  state: CliState,
+) => void
+
+export type CliState = {
+  boilerplate: 'web' | 'api',
+  db: boolean,
+}
