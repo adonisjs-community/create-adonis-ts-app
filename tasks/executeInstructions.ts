@@ -10,19 +10,16 @@
 import { executeInstructions } from '@adonisjs/sink'
 import { TaskFn } from '../src/contracts'
 import { logError } from '../src/logger'
+import { packages } from '../src/boilerplate/packages'
 
 /**
  * Executes instructions on the installed packages
  */
 const task: TaskFn = async (absPath, application, state) => {
   try {
-    await executeInstructions('@adonisjs/core', absPath, application)
-    await executeInstructions('@adonisjs/bodyparser', absPath, application)
-
-    if (state.boilerplate === 'web') {
-      await executeInstructions('@adonisjs/view', absPath, application)
-      await executeInstructions('@adonisjs/session', absPath, application)
-    }
+    await Promise.all(Object.keys(packages[state.boilerplate]).map((name) => {
+      return executeInstructions(name, absPath, application)
+    }))
   } catch (error) {
     const stack = error.stack.split('\n')
     logError(stack.shift(), stack)

@@ -21,8 +21,7 @@
 |
 */
 export const providers = [
-  '@adonisjs/core/build/providers/AppProvider',
-  '@adonisjs/bodyparser',
+${providers}
 ]
 
 /*

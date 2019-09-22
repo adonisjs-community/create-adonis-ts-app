@@ -13,6 +13,7 @@ import { PackageFile } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
 import { logCreateFile, logInstall, logError } from '../src/logger'
+import { packages } from '../src/boilerplate/packages'
 
 /**
  * Creates the `package.json` file in the project root and installs
@@ -38,20 +39,16 @@ const task: TaskFn = async (absPath, _app, state) => {
   }
 
   /**
-   * Prod dependencies
+   * Install adonisjs packages for the selected boilerplate
    */
-  pkg.install('@adonisjs/core', 'latest', false)
-  pkg.install('@adonisjs/fold', '6', false)
-  pkg.install('@adonisjs/bodyparser', '3', false)
+  const boilerPlatePackages = packages[state.boilerplate]
+  Object.keys(boilerPlatePackages).forEach((name) => {
+    pkg.install(name, boilerPlatePackages[name].version, false)
+  })
 
   /**
-   * Installing extra packages for traditional web app
+   * Required peer dependencies
    */
-  if (state.boilerplate === 'web') {
-    pkg.install('@adonisjs/view', 'latest', false)
-    pkg.install('@adonisjs/session', '2', false)
-  }
-
   pkg.install('reflect-metadata', 'latest', false)
   pkg.install('proxy-addr', 'latest', false)
 

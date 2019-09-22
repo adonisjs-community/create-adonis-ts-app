@@ -9,8 +9,10 @@
 
 import { join } from 'path'
 import { TemplateFile } from '@adonisjs/sink'
+
 import { TaskFn } from '../src/contracts'
 import { logCreateFile } from '../src/logger'
+import { packages } from '../src/boilerplate/packages'
 
 const templates = [
   'server.ts',
@@ -23,14 +25,32 @@ const templates = [
 /**
  * Copies templates to project directory
  */
-const task: TaskFn = (absPath) => {
+const task: TaskFn = (absPath, _app, state) => {
+  const boilerPlatePackages = packages[state.boilerplate]
+
   templates.forEach((template) => {
+    let data: any = {}
+
+    /**
+     * Defining providers for the `start/app` file
+     */
+    if (template === 'start/app.ts') {
+      data.providers = []
+      Object.keys(boilerPlatePackages).forEach((name) => {
+        if (boilerPlatePackages[name].providers.length) {
+          data.providers = data.providers.concat(`  '${boilerPlatePackages[name].providers}',`)
+        }
+      })
+
+      data.providers = data.providers.join('\n')
+    }
+
     new TemplateFile(
       absPath,
       template,
       join(__dirname, '..', 'templates', template.replace(/\.ts$/, '.txt')),
     )
-      .apply({})
+      .apply(data)
       .commit()
 
     logCreateFile(template)
