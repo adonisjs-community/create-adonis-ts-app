@@ -12,7 +12,7 @@ export type TaskFn = (
   absPath: string,
   application: ApplicationContract,
   state: CliState,
-) => void
+) => void | Promise<void>
 
 export type CliState = {
   boilerplate: 'web' | 'api',

@@ -8,8 +8,8 @@
 */
 
 import { JsonFile } from '@adonisjs/sink'
-import fancyLogs from '@poppinss/fancy-logs'
 
+import { create } from '../src/logger'
 import { TaskFn } from '../src/contracts'
 
 /**
@@ -29,7 +29,7 @@ const task: TaskFn = (absPath) => {
   })
 
   tsconfig.commit()
-  fancyLogs.create({ message: 'tsconfig.json', icon: false })
+  create('tsconfig.json')
 }
 
 export default task

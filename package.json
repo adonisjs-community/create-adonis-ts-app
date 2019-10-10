@@ -66,9 +66,9 @@
   },
   "dependencies": {
     "@adonisjs/fold": "^6.2.1",
-    "@adonisjs/sink": "^2.2.2",
+    "@adonisjs/sink": "^2.2.3",
     "@poppinss/application": "^1.0.10",
-    "@poppinss/fancy-logs": "^1.1.0",
+    "@poppinss/fancy-logs": "^1.1.1",
     "cli-width": "^2.2.0",
     "fs-extra": "^8.1.0",
     "getopts": "^2.2.5",

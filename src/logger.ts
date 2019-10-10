@@ -9,13 +9,15 @@
 
 import { Ora } from 'ora'
 import cliWidth from 'cli-width'
-import { yellow, dim, underline } from 'kleur'
+import { yellow, dim } from 'kleur'
+import { Logger } from '@poppinss/fancy-logs'
 
 /**
  * Getting width of the stdout to put log messages
  * in one line
  */
 const width = cliWidth()
+const logger = new Logger({ icon: false, underline: false, color: true })
 
 /**
  * Log installing dependencies message
@@ -51,8 +53,13 @@ export function logInstall (list: string[], spinner: Ora, dev: boolean) {
     namedDependencies.push(`and ${outOfBounds} other${outOfBounds !== 1 ? 's' : ''}`)
   }
 
-  spinner.text = ` ${yellow(underline('install'))}  ${namedDependencies.join(', ')} ${dim(`${dev ? '[dev]' : '[prod]'}`)}`
+  spinner.text = ` ${yellow('install')}  ${namedDependencies.join(', ')} ${dim(`${dev ? '[dev]' : '[prod]'}`)}`
   spinner.spinner = 'dots'
   spinner.color = 'gray'
   spinner.start()
 }
+
+export const success: typeof logger.success = logger.success.bind(logger)
+export const error: typeof logger.error = logger.error.bind(logger)
+export const fatal: typeof logger.fatal = logger.fatal.bind(logger)
+export const create: typeof logger.create = logger.create.bind(logger)

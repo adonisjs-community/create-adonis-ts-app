@@ -8,8 +8,8 @@
 */
 
 import { RcFile } from '@adonisjs/sink'
-import fancyLogs from '@poppinss/fancy-logs'
 
+import { create } from '../src/logger'
 import { TaskFn } from '../src/contracts'
 
 /**
@@ -38,7 +38,7 @@ const task: TaskFn = (absPath, _app, state) => {
   }
 
   rcFile.commit()
-  fancyLogs.create({ message: '.adonisrc.json', icon: false })
+  create('.adonisrc.json')
 }
 
 export default task

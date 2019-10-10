@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
 */
 
-import fancyLogs from '@poppinss/fancy-logs'
 import { executeInstructions } from '@adonisjs/sink'
 
+import { fatal } from '../src/logger'
 import { TaskFn } from '../src/contracts'
 import { packages } from '../src/boilerplate/packages'
 
@@ -22,7 +22,7 @@ const task: TaskFn = async (absPath, application, state) => {
       return executeInstructions(name, absPath, application)
     }))
   } catch (error) {
-    fancyLogs.fatal(error)
+    fatal(error)
     throw error
   }
 }

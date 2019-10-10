@@ -8,8 +8,8 @@
 */
 
 import { JsonFile } from '@adonisjs/sink'
-import fancyLogs from '@poppinss/fancy-logs'
 
+import { create } from '../src/logger'
 import { TaskFn } from '../src/contracts'
 
 /**
@@ -20,7 +20,7 @@ const task: TaskFn = (absPath) => {
   tslint.set('extends', 'adonis-preset-ts/tslint')
   tslint.set('rules', {})
   tslint.commit()
-  fancyLogs.create({ message: 'tslint.json', icon: false })
+  create('tslint.json')
 }
 
 export default task
