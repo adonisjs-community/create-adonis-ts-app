@@ -8,8 +8,9 @@
 */
 
 import { LinesFile } from '@adonisjs/sink'
+import fancyLogs from '@poppinss/fancy-logs'
+
 import { TaskFn } from '../src/contracts'
-import { logCreateFile } from '../src/logger'
 
 /**
  * Creates `.gitignore` file inside the project root.
@@ -24,7 +25,7 @@ const task: TaskFn = (absPath) => {
   gitignore.add('.DS_STORE')
 
   gitignore.commit()
-  logCreateFile('.gitignore')
+  fancyLogs.create({ message: '.gitignore', icon: false })
 }
 
 export default task

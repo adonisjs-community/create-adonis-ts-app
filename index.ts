@@ -7,15 +7,14 @@
  * file that was distributed with this source code.
 */
 
-import { red } from 'kleur'
 import getops from 'getopts'
 import { isAbsolute, join } from 'path'
 import { isEmptyDir } from '@adonisjs/sink'
+import fancyLogs from '@poppinss/fancy-logs'
 import { Application } from '@poppinss/application'
 import { ensureDirSync, removeSync } from 'fs-extra'
 
 import { tasks } from './tasks'
-import { logError } from './src/logger'
 import { CliState } from './src/contracts'
 
 /**
@@ -30,7 +29,7 @@ export async function runTasks () {
    * Ensure project name is defined
    */
   if (!argv._.length) {
-    console.log(red('Project name is required to create a new app'))
+    fancyLogs.error('Project name is required to create a new app')
     return
   }
 
@@ -58,7 +57,7 @@ export async function runTasks () {
       'Make sure to define path to an empty directory',
     ]
 
-    console.log(red(errors.join(' ')))
+    fancyLogs.error(errors.join(' '))
     return
   }
 
@@ -71,7 +70,7 @@ export async function runTasks () {
     try {
       await task(absPath, application, state)
     } catch (error) {
-      logError('Unable to create new project. Rolling back')
+      fancyLogs.error('Unable to create new project. Rolling back')
       removeSync(absPath)
     }
   }

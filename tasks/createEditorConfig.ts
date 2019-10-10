@@ -8,8 +8,9 @@
 */
 
 import { IniFile } from '@adonisjs/sink'
+import fancyLogs from '@poppinss/fancy-logs'
+
 import { TaskFn } from '../src/contracts'
-import { logCreateFile } from '../src/logger'
 
 /**
  * Creates `.editorconfig` inside the project root.
@@ -35,7 +36,7 @@ const task: TaskFn = (absPath) => {
   })
 
   editorConfig.commit()
-  logCreateFile('.editorconfig')
+  fancyLogs.create({ message: '.editorconfig', icon: false })
 }
 
 export default task

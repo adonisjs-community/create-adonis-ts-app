@@ -9,20 +9,13 @@
 
 import { Ora } from 'ora'
 import cliWidth from 'cli-width'
-import { green, yellow, red, bgRed, dim } from 'kleur'
+import { yellow, dim } from 'kleur'
 
 /**
  * Getting width of the stdout to put log messages
  * in one line
  */
 const width = cliWidth()
-
-/**
- * Logging create file message
- */
-export function logCreateFile (filePath: string) {
-  console.log(`  create  ${green(filePath)}`)
-}
 
 /**
  * Log installing dependencies message
@@ -62,17 +55,4 @@ export function logInstall (list: string[], spinner: Ora, dev: boolean) {
   spinner.spinner = 'dots'
   spinner.color = 'gray'
   spinner.start()
-}
-
-/**
- * Logging error
- */
-export function logError (message: string, stack?: string[]) {
-  console.log('')
-  console.log(`  ${bgRed(` ${message} `)}`)
-  if (stack) {
-    stack.forEach((line) => {
-      console.log(`    ${red(line)}`)
-    })
-  }
 }

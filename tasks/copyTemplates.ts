@@ -8,10 +8,10 @@
 */
 
 import { join } from 'path'
+import fancyLogs from '@poppinss/fancy-logs'
 import { TemplateFile } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
-import { logCreateFile } from '../src/logger'
 import { packages } from '../src/boilerplate/packages'
 
 const templates = [
@@ -53,7 +53,7 @@ const task: TaskFn = (absPath, _app, state) => {
       .apply(data)
       .commit()
 
-    logCreateFile(template)
+    fancyLogs.create({ message: template, icon: false })
   })
 }
 

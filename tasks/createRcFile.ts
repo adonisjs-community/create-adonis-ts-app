@@ -8,8 +8,9 @@
 */
 
 import { RcFile } from '@adonisjs/sink'
+import fancyLogs from '@poppinss/fancy-logs'
+
 import { TaskFn } from '../src/contracts'
-import { logCreateFile } from '../src/logger'
 
 /**
  * Creates the `.adonisrc.json` file in the project root
@@ -29,7 +30,7 @@ const task: TaskFn = (absPath) => {
   rcFile.addMetaFile('.gitignore')
 
   rcFile.commit()
-  logCreateFile('.adonisrc.json')
+  fancyLogs.create({ message: '.adonisrc.json', icon: false })
 }
 
 export default task

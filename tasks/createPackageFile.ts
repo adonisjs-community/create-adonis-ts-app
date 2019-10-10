@@ -10,9 +10,10 @@
 import ora from 'ora'
 import { basename } from 'path'
 import { PackageFile } from '@adonisjs/sink'
+import fancyLogs from '@poppinss/fancy-logs'
 
 import { TaskFn } from '../src/contracts'
-import { logCreateFile, logInstall, logError } from '../src/logger'
+import { logInstall } from '../src/logger'
 import { packages } from '../src/boilerplate/packages'
 
 /**
@@ -84,10 +85,10 @@ const task: TaskFn = async (absPath, _app, state) => {
 
   if (response && response.status === 1) {
     const errorMessage = useYarn ? 'yarn install failed' : 'npm install failed'
-    logError(errorMessage, response.stderr.toString().split('\n'))
+    fancyLogs.fatal({ message: errorMessage, stack: response.stderr.toString() })
     throw new Error('Installation failed')
   } else {
-    logCreateFile('package.json')
+    fancyLogs.create({ message: 'package.json', icon: false })
   }
 }
 
