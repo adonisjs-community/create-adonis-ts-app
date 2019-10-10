@@ -9,7 +9,7 @@
 
 import { Ora } from 'ora'
 import cliWidth from 'cli-width'
-import { yellow, dim } from 'kleur'
+import { yellow, dim, underline } from 'kleur'
 
 /**
  * Getting width of the stdout to put log messages
@@ -51,7 +51,7 @@ export function logInstall (list: string[], spinner: Ora, dev: boolean) {
     namedDependencies.push(`and ${outOfBounds} other${outOfBounds !== 1 ? 's' : ''}`)
   }
 
-  spinner.text = `install ${yellow(namedDependencies.join(', '))} ${dim(`${dev ? '[dev]' : '[prod]'}`)}`
+  spinner.text = ` ${yellow(underline('install'))}  ${namedDependencies.join(', ')} ${dim(`${dev ? '[dev]' : '[prod]'}`)}`
   spinner.spinner = 'dots'
   spinner.color = 'gray'
   spinner.start()
