@@ -15,7 +15,7 @@ import { TaskFn } from '../src/contracts'
 /**
  * Creates the `.adonisrc.json` file in the project root
  */
-const task: TaskFn = (absPath) => {
+const task: TaskFn = (absPath, _app, state) => {
   const rcFile = new RcFile(absPath)
 
   rcFile.setExceptionHandler('App/Exceptions/Handler')
@@ -28,6 +28,14 @@ const task: TaskFn = (absPath) => {
   rcFile.addMetaFile('.env')
   rcFile.addMetaFile('.adonisrc.json')
   rcFile.addMetaFile('.gitignore')
+
+  /**
+   * Extra files for the web boilerplate
+   */
+  if (state.boilerplate === 'web') {
+    rcFile.addMetaFile('resources/views/**/*.edge')
+    rcFile.addMetaFile('public/**')
+  }
 
   rcFile.commit()
   fancyLogs.create({ message: '.adonisrc.json', icon: false })
