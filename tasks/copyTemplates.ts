@@ -15,12 +15,12 @@ import { TaskFn } from '../src/contracts'
 import { packages } from '../src/boilerplate/packages'
 
 const templates = [
-  'server.ts',
-  'start/app.ts',
-  'start/kernel.ts',
-  'start/routes.ts',
-  'app/Exceptions/Handler.ts',
-  'providers/AppProvider.ts',
+  'server.txt',
+  'start/app.txt',
+  'start/kernel.txt',
+  'start/routes.txt',
+  'app/Exceptions/Handler.txt',
+  'providers/AppProvider.txt',
 ]
 
 /**
@@ -38,7 +38,7 @@ const task: TaskFn = (absPath, _app, state) => {
     /**
      * Defining providers for the `start/app` file
      */
-    if (template === 'start/app.ts') {
+    if (template === 'start/app.txt') {
       data.providers = []
       Object.keys(boilerPlatePackages).forEach((name) => {
         if (boilerPlatePackages[name].providers.length) {
@@ -52,7 +52,7 @@ const task: TaskFn = (absPath, _app, state) => {
     /**
      * Middleware based upon the type of project
      */
-    if (template === 'start/kernel.ts') {
+    if (template === 'start/kernel.txt') {
       data.middleware = state.boilerplate === 'api'
         ? [`'App/Middleware/SpoofAccept',`, `'Adonis/Addons/BodyParserMiddleware',`]
         : [`'Adonis/Addons/BodyParserMiddleware',`]
@@ -60,8 +60,8 @@ const task: TaskFn = (absPath, _app, state) => {
 
     new TemplateFile(
       absPath,
-      template,
-      join(__dirname, '..', 'templates', template.replace(/\.ts$/, '.txt')),
+      template.replace(/\.txt$/, '.ts'),
+      join(__dirname, '..', 'templates', template),
     )
       .apply(data)
       .commit()
