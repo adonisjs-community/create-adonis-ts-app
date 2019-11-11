@@ -15,7 +15,7 @@ import { ensureDirSync, removeSync } from 'fs-extra'
 
 import { tasks } from './tasks'
 import { CliState } from './src/contracts'
-import { error } from './src/logger'
+import { error, fatal } from './src/logger'
 
 /**
  * Running all the tasks to create a new project.
@@ -69,8 +69,9 @@ export async function runTasks () {
   for (let task of tasks) {
     try {
       await task(absPath, application, state)
-    } catch (error) {
+    } catch (err) {
       error('Unable to create new project. Rolling back')
+      fatal(err)
       removeSync(absPath)
     }
   }

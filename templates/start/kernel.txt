@@ -21,7 +21,7 @@ import Server from '@ioc:Adonis/Core/Server'
 |
 */
 Server.middleware.register([
-  'Adonis/Addons/BodyParserMiddleware',
+${middleware.map((one) => '  ' + one).join('\n')}
 ])
 
 /*

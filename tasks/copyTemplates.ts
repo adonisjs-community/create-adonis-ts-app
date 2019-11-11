@@ -27,6 +27,9 @@ const templates = [
  */
 const task: TaskFn = (absPath, _app, state) => {
   const boilerPlatePackages = packages[state.boilerplate]
+  if (state.boilerplate === 'api') {
+    templates.push('app/Middleware/SpoofAccept.ts')
+  }
 
   templates.forEach((template) => {
     let data: any = {}
@@ -43,6 +46,15 @@ const task: TaskFn = (absPath, _app, state) => {
       })
 
       data.providers = data.providers.join('\n')
+    }
+
+    /**
+     * Middleware based upon the type of project
+     */
+    if (template === 'start/kernel.ts') {
+      data.middleware = state.boilerplate === 'api'
+        ? [`'App/Middleware/SpoofAccept',`, `'Adonis/Addons/BodyParserMiddleware',`]
+        : [`'Adonis/Addons/BodyParserMiddleware',`]
     }
 
     new TemplateFile(
