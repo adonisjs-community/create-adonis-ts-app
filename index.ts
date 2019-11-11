@@ -73,6 +73,7 @@ export async function runTasks () {
       error('Unable to create new project. Rolling back')
       fatal(err)
       removeSync(absPath)
+      return
     }
   }
 }

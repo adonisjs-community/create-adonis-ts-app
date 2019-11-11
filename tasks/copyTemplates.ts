@@ -20,6 +20,7 @@ const templates = [
   'start/kernel.ts',
   'start/routes.ts',
   'app/Exceptions/Handler.ts',
+  'providers/AppProvider.ts',
 ]
 
 /**
@@ -41,11 +42,11 @@ const task: TaskFn = (absPath, _app, state) => {
       data.providers = []
       Object.keys(boilerPlatePackages).forEach((name) => {
         if (boilerPlatePackages[name].providers.length) {
-          data.providers = data.providers.concat(`  '${boilerPlatePackages[name].providers}',`)
+          data.providers = data.providers.concat(`'${boilerPlatePackages[name].providers}',`)
         }
       })
 
-      data.providers = data.providers.join('\n')
+      data.providers.push(`'./providers/AppProvider',`)
     }
 
     /**

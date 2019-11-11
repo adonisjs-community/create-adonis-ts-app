@@ -21,7 +21,7 @@
 |
 */
 export const providers = [
-${providers}
+${providers.map((provider) => '  ' + provider).join('\n')}
 ]
 
 /*
