@@ -51,6 +51,7 @@ const task: TaskFn = async (absPath, _app, state) => {
    */
   pkg.install('reflect-metadata', 'latest', false)
   pkg.install('proxy-addr', 'latest', false)
+  pkg.install('source-map-support', 'latest', false)
 
   /**
    * Dev dependencies
