@@ -65,8 +65,8 @@
     "create-adonis-ts-app": "build/bin/run.js"
   },
   "dependencies": {
-    "@adonisjs/fold": "^6.2.2",
-    "@adonisjs/sink": "^2.2.3",
+    "@adonisjs/fold": "^6.2.3",
+    "@adonisjs/sink": "^2.3.0",
     "@poppinss/application": "^1.0.10",
     "@poppinss/fancy-logs": "^1.2.1",
     "cli-width": "^2.2.0",
