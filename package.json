@@ -66,13 +66,11 @@
   },
   "dependencies": {
     "@adonisjs/fold": "^6.2.3",
-    "@adonisjs/sink": "^2.3.0",
+    "@adonisjs/sink": "^2.3.1",
     "@poppinss/application": "^1.0.10",
-    "@poppinss/fancy-logs": "^1.2.1",
     "cli-width": "^2.2.0",
     "fs-extra": "^8.1.0",
     "getopts": "^2.2.5",
-    "kleur": "^3.0.3",
     "ora": "^4.0.2",
     "randomstring": "^1.1.5"
   },

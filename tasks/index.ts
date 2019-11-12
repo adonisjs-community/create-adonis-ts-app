@@ -8,12 +8,12 @@
 */
 
 import createRcFile from './createRcFile'
-import createEnvFile from './createEnvFile'
-import createPackageFile from './createPackageFile'
-import createGitIgnore from './createGitIgnore'
-import createTsConfig from './createTsConfig'
 import createTsLint from './createTslint'
 import copyTemplates from './copyTemplates'
+import createEnvFile from './createEnvFile'
+import createTsConfig from './createTsConfig'
+import createGitIgnore from './createGitIgnore'
+import createPackageFile from './createPackageFile'
 import createEditorConfig from './createEditorConfig'
 import executeInstructions from './executeInstructions'
 
