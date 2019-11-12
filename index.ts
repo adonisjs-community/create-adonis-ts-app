@@ -1,5 +1,5 @@
 /*
- * adonis-ts-boilerplate
+ * create-adonis-ts-app
  *
  * (c) Harminder Virk <virk@adonisjs.com>
  *
@@ -9,19 +9,18 @@
 
 import getops from 'getopts'
 import { isAbsolute, join } from 'path'
-import { isEmptyDir } from '@adonisjs/sink'
 import { Application } from '@poppinss/application'
+import { isEmptyDir, logger } from '@adonisjs/sink'
 import { ensureDirSync, removeSync } from 'fs-extra'
 
 import { tasks } from './tasks'
 import { CliState } from './src/contracts'
-import { error, fatal } from './src/logger'
 
 /**
  * Running all the tasks to create a new project.
  */
-export async function runTasks () {
-  const argv = getops(process.argv.slice(2), {
+export async function runTasks (args: string[]) {
+  const argv = getops(args, {
     string: ['boilerplate'],
   })
 
@@ -29,7 +28,7 @@ export async function runTasks () {
    * Ensure project name is defined
    */
   if (!argv._.length) {
-    error('Project name is required to create a new app')
+    logger.error('Project name is required to create a new app')
     return
   }
 
@@ -57,7 +56,7 @@ export async function runTasks () {
       'Make sure to define path to an empty directory',
     ]
 
-    error(errors.join(' '))
+    logger.error(errors.join(' '))
     return
   }
 
@@ -70,8 +69,8 @@ export async function runTasks () {
     try {
       await task(absPath, application, state)
     } catch (err) {
-      error('Unable to create new project. Rolling back')
-      fatal(err)
+      logger.error('Unable to create new project. Rolling back')
+      logger.fatal(err)
       removeSync(absPath)
       return
     }

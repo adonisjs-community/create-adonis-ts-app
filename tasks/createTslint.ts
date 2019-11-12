@@ -7,9 +7,7 @@
  * file that was distributed with this source code.
 */
 
-import { JsonFile } from '@adonisjs/sink'
-
-import { create } from '../src/logger'
+import { JsonFile, logger } from '@adonisjs/sink'
 import { TaskFn } from '../src/contracts'
 
 /**
@@ -20,7 +18,7 @@ const task: TaskFn = (absPath) => {
   tslint.set('extends', 'adonis-preset-ts/tslint')
   tslint.set('rules', {})
   tslint.commit()
-  create('tslint.json')
+  logger.create('tslint.json')
 }
 
 export default task

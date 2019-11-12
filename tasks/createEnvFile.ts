@@ -8,10 +8,9 @@
 */
 
 import randomstring from 'randomstring'
-import { EnvFile } from '@adonisjs/sink'
+import { EnvFile, logger } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
-import { create } from '../src/logger'
 
 /**
  * Creates the `.env` file inside the project root. Also
@@ -27,7 +26,7 @@ const task: TaskFn = (absPath) => {
   env.set('APP_KEY', randomstring.generate(32))
 
   env.commit()
-  create('.env, .env.example')
+  logger.create('.env, .env.example')
 }
 
 export default task

@@ -9,11 +9,11 @@
 
 import ora from 'ora'
 import { basename } from 'path'
-import { PackageFile } from '@adonisjs/sink'
+import { PackageFile, logger } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
+import { logInstall } from '../src/spinner'
 import { packages } from '../src/boilerplate/packages'
-import { logInstall, create, fatal } from '../src/logger'
 
 /**
  * Creates the `package.json` file in the project root and installs
@@ -85,10 +85,10 @@ const task: TaskFn = async (absPath, _app, state) => {
 
   if (response && response.status === 1) {
     const errorMessage = useYarn ? 'yarn install failed' : 'npm install failed'
-    fatal({ message: errorMessage, stack: response.stderr.toString() })
+    logger.fatal({ message: errorMessage, stack: response.stderr.toString() })
     throw new Error('Installation failed')
   } else {
-    create('package.json')
+    logger.create('package.json')
   }
 }
 

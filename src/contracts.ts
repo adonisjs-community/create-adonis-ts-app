@@ -8,12 +8,19 @@
 */
 
 import { ApplicationContract } from '@poppinss/application'
+
+/**
+ * Shape of task functions
+ */
 export type TaskFn = (
   absPath: string,
   application: ApplicationContract,
   state: CliState,
 ) => void | Promise<void>
 
+/**
+ * CLI state
+ */
 export type CliState = {
   boilerplate: 'web' | 'api',
   db: boolean,

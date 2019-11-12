@@ -7,10 +7,9 @@
  * file that was distributed with this source code.
 */
 
-import { LinesFile } from '@adonisjs/sink'
+import { LinesFile, logger } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
-import { create } from '../src/logger'
 
 /**
  * Creates `.gitignore` file inside the project root.
@@ -25,7 +24,7 @@ const task: TaskFn = (absPath) => {
   gitignore.add('.DS_STORE')
 
   gitignore.commit()
-  create('.gitignore')
+  logger.create('.gitignore')
 }
 
 export default task

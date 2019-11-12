@@ -7,9 +7,7 @@
  * file that was distributed with this source code.
 */
 
-import { JsonFile } from '@adonisjs/sink'
-
-import { create } from '../src/logger'
+import { JsonFile, logger } from '@adonisjs/sink'
 import { TaskFn } from '../src/contracts'
 
 /**
@@ -29,7 +27,7 @@ const task: TaskFn = (absPath) => {
   })
 
   tsconfig.commit()
-  create('tsconfig.json')
+  logger.create('tsconfig.json')
 }
 
 export default task

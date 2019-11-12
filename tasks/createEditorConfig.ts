@@ -7,9 +7,8 @@
  * file that was distributed with this source code.
 */
 
-import { IniFile } from '@adonisjs/sink'
+import { IniFile, logger } from '@adonisjs/sink'
 import { TaskFn } from '../src/contracts'
-import { create } from '../src/logger'
 
 /**
  * Creates `.editorconfig` inside the project root.
@@ -35,7 +34,7 @@ const task: TaskFn = (absPath) => {
   })
 
   editorConfig.commit()
-  create('.editorconfig')
+  logger.create('.editorconfig')
 }
 
 export default task

@@ -7,9 +7,7 @@
  * file that was distributed with this source code.
 */
 
-import { RcFile } from '@adonisjs/sink'
-
-import { create } from '../src/logger'
+import { RcFile, logger } from '@adonisjs/sink'
 import { TaskFn } from '../src/contracts'
 
 /**
@@ -38,7 +36,7 @@ const task: TaskFn = (absPath, _app, state) => {
   }
 
   rcFile.commit()
-  create('.adonisrc.json')
+  logger.create('.adonisrc.json')
 }
 
 export default task

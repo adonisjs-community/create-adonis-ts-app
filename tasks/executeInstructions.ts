@@ -7,9 +7,8 @@
  * file that was distributed with this source code.
 */
 
-import { executeInstructions } from '@adonisjs/sink'
+import { executeInstructions, logger } from '@adonisjs/sink'
 
-import { fatal } from '../src/logger'
 import { TaskFn } from '../src/contracts'
 import { packages } from '../src/boilerplate/packages'
 
@@ -22,7 +21,7 @@ const task: TaskFn = async (absPath, application, state) => {
       return executeInstructions(name, absPath, application)
     }))
   } catch (error) {
-    fatal(error)
+    logger.fatal(error)
     throw error
   }
 }
