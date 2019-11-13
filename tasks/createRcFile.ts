@@ -9,6 +9,7 @@
 
 import { RcFile, logger } from '@adonisjs/sink'
 import { TaskFn } from '../src/contracts'
+import { metaFiles } from '../src/schematics/rcMetaFiles'
 
 /**
  * Creates the `.adonisrc.json` file in the project root
@@ -16,6 +17,8 @@ import { TaskFn } from '../src/contracts'
 const task: TaskFn = (absPath, _app, state) => {
   const rcFile = new RcFile(absPath)
 
+  rcFile.set('typescript', true)
+  rcFile.set('commands', {})
   rcFile.setExceptionHandler('App/Exceptions/Handler')
   rcFile.setAutoload('App', 'app')
   rcFile.setAutoload('Contracts', 'contracts')
@@ -23,17 +26,9 @@ const task: TaskFn = (absPath, _app, state) => {
   rcFile.setPreload('start/routes')
   rcFile.setPreload('start/kernel')
 
-  rcFile.addMetaFile('.env')
-  rcFile.addMetaFile('.adonisrc.json')
-  rcFile.addMetaFile('.gitignore')
-
-  /**
-   * Extra files for the web boilerplate
-   */
-  if (state.boilerplate === 'web') {
-    rcFile.addMetaFile('resources/views/**/*.edge')
-    rcFile.addMetaFile('public/**')
-  }
+  metaFiles[state.boilerplate].forEach((file) => {
+    rcFile.addMetaFile(file)
+  })
 
   rcFile.commit()
   logger.create('.adonisrc.json')

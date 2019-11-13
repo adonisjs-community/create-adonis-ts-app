@@ -20,6 +20,7 @@ const task: TaskFn = (absPath) => {
   tsconfig.set('exclude', ['node_modules', 'build'])
   tsconfig.set('extends', './node_modules/adonis-preset-ts/tsconfig')
   tsconfig.set('compilerOptions', {
+    outDir: 'build',
     paths: {
       'App/*': ['./app/*'],
       'Contracts/*': ['./contracts/*'],

@@ -23,5 +23,4 @@ export type TaskFn = (
  */
 export type CliState = {
   boilerplate: 'web' | 'api',
-  db: boolean,
 }

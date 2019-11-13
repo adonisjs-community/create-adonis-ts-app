@@ -8,65 +8,24 @@
 */
 
 import { join } from 'path'
+import readDir from 'fs-readdir-recursive'
 import { TemplateFile, logger } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
-import { packages } from '../src/boilerplate/packages'
-
-const templates = [
-  'server.txt',
-  'start/app.txt',
-  'start/kernel.txt',
-  'start/routes.txt',
-  'app/Exceptions/Handler.txt',
-  'providers/AppProvider.txt',
-]
 
 /**
  * Copies templates to project directory
  */
 const task: TaskFn = (absPath, _app, state) => {
-  const boilerPlatePackages = packages[state.boilerplate]
-  if (state.boilerplate === 'api') {
-    templates.push('app/Middleware/SpoofAccept.ts')
-  }
+  const files = readDir(join(__dirname, '..', 'templates', state.boilerplate))
 
-  templates.forEach((template) => {
-    let data: any = {}
-
-    /**
-     * Defining providers for the `start/app` file
-     */
-    if (template === 'start/app.txt') {
-      data.providers = []
-      Object.keys(boilerPlatePackages).forEach((name) => {
-        if (boilerPlatePackages[name].providers.length) {
-          data.providers = data.providers.concat(`'${boilerPlatePackages[name].providers}',`)
-        }
-      })
-
-      data.providers.push(`'./providers/AppProvider',`)
-    }
-
-    /**
-     * Middleware based upon the type of project
-     */
-    if (template === 'start/kernel.txt') {
-      data.middleware = state.boilerplate === 'api'
-        ? [`'App/Middleware/SpoofAccept',`, `'Adonis/Addons/BodyParserMiddleware',`]
-        : [`'Adonis/Addons/BodyParserMiddleware',`]
-    }
-
-    new TemplateFile(
-      absPath,
-      template.replace(/\.txt$/, '.ts'),
-      join(__dirname, '..', 'templates', template),
-    )
-      .apply(data)
-      .commit()
-
-    logger.create(template)
-  })
+  files
+    .forEach((name: string) => {
+      const outputFileName = name.replace(/\.txt$/, '.ts')
+      const src = join(__dirname, '..', 'templates', state.boilerplate, name)
+      new TemplateFile(absPath, outputFileName, src).apply({}).commit()
+      logger.create(outputFileName)
+    })
 }
 
 export default task

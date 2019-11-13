@@ -22,6 +22,7 @@ const task: TaskFn = (absPath) => {
   gitignore.add('coverage')
   gitignore.add('.vscode')
   gitignore.add('.DS_STORE')
+  gitignore.add('.env')
 
   gitignore.commit()
   logger.create('.gitignore')

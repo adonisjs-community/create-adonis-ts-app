@@ -21,7 +21,9 @@
 |
 */
 export const providers = [
-${providers.map((provider) => '  ' + provider).join('\n')}
+  '@adonisjs/core',
+  '@adonisjs/bodyparser',
+  './providers/AppProvider',
 ]
 
 /*

@@ -13,7 +13,7 @@ import { PackageFile, logger } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
 import { logInstall } from '../src/spinner'
-import { packages } from '../src/boilerplate/packages'
+import { packages } from '../src/schematics/packages'
 
 /**
  * Creates the `package.json` file in the project root and installs
@@ -26,14 +26,13 @@ const task: TaskFn = async (absPath, _app, state) => {
   pkg.set('version', '0.0.0')
   pkg.set('private', true)
 
-  pkg.setScript('build', 'adonis build')
-  pkg.setScript('start', 'adonis serve --dev')
-
-  const useYarn = process.env.npm_execpath && process.env.npm_execpath.includes('yarn')
+  pkg.setScript('build', 'node ace build')
+  pkg.setScript('start', 'node ace serve --watch')
 
   /**
-   * Use yarn when executed as `yarn create`
+   * Set by `yarn create`
    */
+  const useYarn = process.env.npm_execpath && process.env.npm_execpath.includes('yarn')
   if (useYarn) {
     pkg.yarn(true)
   }

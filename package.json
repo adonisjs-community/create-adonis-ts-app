@@ -12,13 +12,12 @@
     "build/index.js"
   ],
   "scripts": {
-    "postinstall": "node build/bin/run.js",
     "mrm": "mrm --preset=@adonisjs/mrm-preset",
     "pretest": "npm run lint",
     "test": "node japaFile.js",
     "lint": "tslint --project tsconfig.json",
     "clean": "del build",
-    "compile": "npm run lint && npm run clean && tsc && copyfiles \"templates/**/*.txt\" build",
+    "compile": "npm run lint && npm run clean && tsc && copyfiles \"templates/**/*.txt\" \"templates/**/*.edge\" build",
     "build": "npm run compile",
     "commit": "git-cz",
     "release": "np",
@@ -69,7 +68,9 @@
     "@adonisjs/sink": "^2.3.1",
     "@poppinss/application": "^1.0.10",
     "cli-width": "^2.2.0",
+    "dedent": "^0.7.0",
     "fs-extra": "^8.1.0",
+    "fs-readdir-recursive": "^1.1.0",
     "getopts": "^2.2.5",
     "ora": "^4.0.2",
     "randomstring": "^1.1.5"
