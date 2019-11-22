@@ -18,8 +18,8 @@ import HttpExceptionHandler from '@ioc:Adonis/Core/HttpExceptionHandler'
 
 export default class ExceptionHandler extends HttpExceptionHandler {
   protected statusPages = {
-    '404': 'errors.404.edge',
-    '5xx': 'errors.5xx.edge',
+    '404': 'errors.not-found',
+    '500..599': 'errors.server-error',
   }
 
   constructor () {
