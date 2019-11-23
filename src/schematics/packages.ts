@@ -19,16 +19,16 @@ export const packages: {
       version: 'latest',
     },
     '@adonisjs/fold': {
-      version: '6',
+      version: '^6.0.0',
     },
     '@adonisjs/ace': {
-      version: '6',
+      version: '^6.0.0',
     },
     '@adonisjs/bodyparser': {
-      version: '3',
+      version: '^3.0.0',
     },
     '@adonisjs/session': {
-      version: '2',
+      version: '^2.0.0',
     },
     '@adonisjs/view': {
       version: 'latest',
@@ -39,13 +39,13 @@ export const packages: {
       version: 'latest',
     },
     '@adonisjs/ace': {
-      version: '6',
+      version: '^6.0.0',
     },
     '@adonisjs/fold': {
-      version: '6',
+      version: '^6.0.0',
     },
     '@adonisjs/bodyparser': {
-      version: '3',
+      version: '^3.0.0',
     },
   },
 }
