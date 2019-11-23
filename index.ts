@@ -9,9 +9,9 @@
 
 import getops from 'getopts'
 import { isAbsolute, join } from 'path'
-import { Application } from '@poppinss/application'
 import { isEmptyDir, logger } from '@adonisjs/sink'
 import { ensureDirSync, removeSync } from 'fs-extra'
+import { Application } from '@adonisjs/application/build/standalone'
 
 import { tasks } from './tasks'
 import { CliState } from './src/contracts'

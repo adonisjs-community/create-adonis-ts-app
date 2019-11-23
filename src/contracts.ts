@@ -7,14 +7,14 @@
 * file that was distributed with this source code.
 */
 
-import { ApplicationContract } from '@poppinss/application'
+import { Application } from '@adonisjs/application/build/standalone'
 
 /**
  * Shape of task functions
  */
 export type TaskFn = (
   absPath: string,
-  application: ApplicationContract,
+  application: Application,
   state: CliState,
 ) => void | Promise<void>
 
