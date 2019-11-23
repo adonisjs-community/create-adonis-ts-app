@@ -18,7 +18,7 @@ const task: TaskFn = (absPath, _app, state) => {
   const rcFile = new RcFile(absPath)
 
   rcFile.set('typescript', true)
-  rcFile.set('commands', {})
+  rcFile.set('commands', [])
   rcFile.setExceptionHandler('App/Exceptions/Handler')
   rcFile.setAutoload('App', 'app')
   rcFile.setAutoload('Contracts', 'contracts')
