@@ -56,11 +56,12 @@ const task: TaskFn = async (absPath, _app, state) => {
    * Dev dependencies
    */
   pkg.install('typescript')
+  pkg.install('@adonisjs/assembler')
+  pkg.install('tslint')
+  pkg.install('tslint-eslint-rules')
   pkg.install('youch')
   pkg.install('youch-terminal')
   pkg.install('pino-pretty')
-  pkg.install('tslint')
-  pkg.install('tslint-eslint-rules')
   pkg.install('adonis-preset-ts')
 
   /**
