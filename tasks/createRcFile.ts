@@ -8,6 +8,7 @@
 */
 
 import { RcFile, logger } from '@adonisjs/sink'
+
 import { TaskFn } from '../src/contracts'
 import { metaFiles } from '../src/schematics/rcMetaFiles'
 
@@ -18,13 +19,13 @@ const task: TaskFn = (absPath, _app, state) => {
   const rcFile = new RcFile(absPath)
 
   rcFile.set('typescript', true)
-  rcFile.set('commands', [])
+  rcFile.set('commands', ['./commands'])
   rcFile.setExceptionHandler('App/Exceptions/Handler')
   rcFile.setAutoload('App', 'app')
   rcFile.setAutoload('Contracts', 'contracts')
 
-  rcFile.setPreload('start/routes')
-  rcFile.setPreload('start/kernel')
+  rcFile.setPreload('./start/routes')
+  rcFile.setPreload('./start/kernel')
 
   metaFiles[state.boilerplate].forEach((file) => {
     rcFile.addMetaFile(file)

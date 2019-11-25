@@ -7,14 +7,14 @@
 * file that was distributed with this source code.
 */
 
-import { Application } from '@adonisjs/application/build/standalone'
+import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 
 /**
  * Shape of task functions
  */
 export type TaskFn = (
   absPath: string,
-  application: Application,
+  application: ApplicationContract,
   state: CliState,
 ) => void | Promise<void>
 

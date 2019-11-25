@@ -59,8 +59,3 @@ export function logInstall (list: string[], spinner: Ora, dev: boolean) {
   spinner.color = 'gray'
   spinner.start()
 }
-
-// export const success: typeof logger.success = logger.success.bind(logger)
-// export const error: typeof logger.error = logger.error.bind(logger)
-// export const fatal: typeof logger.fatal = logger.fatal.bind(logger)
-// export const create: typeof logger.create = logger.create.bind(logger)
