@@ -13,7 +13,11 @@ import { TaskFn } from '../src/contracts'
 /**
  * Creates `tslint.json` file
  */
-const task: TaskFn = (absPath) => {
+const task: TaskFn = (absPath, _app, state) => {
+  if (!state.tslint) {
+    return
+  }
+
   const tslint = new JsonFile(absPath, 'tslint.json')
   tslint.set('extends', 'adonis-preset-ts/tslint')
   tslint.set('rules', {})

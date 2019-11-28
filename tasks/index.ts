@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
 */
 
+import greet from './greet'
 import createRcFile from './createRcFile'
 import createTsLint from './createTslint'
 import copyTemplates from './copyTemplates'
@@ -30,4 +31,5 @@ export const tasks = [
   createEditorConfig,
   createPackageFile,
   executeInstructions,
+  greet,
 ]

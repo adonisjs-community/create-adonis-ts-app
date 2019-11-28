@@ -8,7 +8,8 @@
 */
 
 import getops from 'getopts'
-import { isAbsolute, join } from 'path'
+import { Prompt } from '@poppinss/prompts'
+import { isAbsolute, join, basename } from 'path'
 import { isEmptyDir, logger } from '@adonisjs/sink'
 import { ensureDirSync, removeSync } from 'fs-extra'
 import { Application } from '@adonisjs/application/build/standalone'
@@ -21,7 +22,11 @@ import { CliState } from './src/contracts'
  */
 export async function runTasks (args: string[]) {
   const argv = getops(args, {
-    string: ['boilerplate'],
+    string: ['boilerplate', 'name'],
+    boolean: ['tslint'],
+    default: {
+      tslint: null,
+    },
   })
 
   /**
@@ -32,13 +37,6 @@ export async function runTasks (args: string[]) {
     return
   }
 
-  let state: CliState = {
-    boilerplate: argv.boilerplate || 'web',
-  }
-
-  // tslint:disable-next-line: max-line-length quotemark
-  console.log("    _       _             _         _     \n   / \\   __| | ___  _ __ (_)___    | |___ \n  / _ \\ / _` |/ _ \\| '_ \\| / __|_  | / __|\n / ___ \\ (_| | (_) | | | | \\__ \\ |_| \\__ \\\n/_/   \\_\\__,_|\\___/|_| |_|_|___/\\___/|___/\n")
-
   const projectRoot = argv._[0].trim()
 
   /**
@@ -46,6 +44,50 @@ export async function runTasks (args: string[]) {
    * working directory
    */
   const absPath = isAbsolute(projectRoot) ? projectRoot : join(process.cwd(), projectRoot)
+
+  let state: CliState = {
+    baseName: projectRoot,
+    boilerplate: argv.boilerplate,
+    name: argv.name,
+    tslint: argv.tslint,
+  }
+
+  /**
+   * Ask for the project structure
+   */
+  if (!state.boilerplate) {
+    state.boilerplate = await new Prompt().choice('Select the project structure', [
+      {
+        name: 'api',
+        message: 'API Server',
+      },
+      {
+        name: 'web',
+        message: 'Web Application',
+      },
+    ])
+  }
+
+  /**
+   * Ask for project name. We can fill it inside the `package.json`
+   * file
+   */
+  if (!state.name) {
+    state.name = await new Prompt().ask('Enter the project name', {
+      default: basename(absPath),
+    })
+  }
+
+  /**
+   * Ask for project name. We can fill it inside the `package.json`
+   * file
+   */
+  if (state.tslint === null) {
+    state.tslint = await new Prompt().confirm('Setup tslint?')
+  }
+
+  // tslint:disable-next-line: max-line-length quotemark
+  console.log("    _       _             _         _     \n   / \\   __| | ___  _ __ (_)___    | |___ \n  / _ \\ / _` |/ _ \\| '_ \\| / __|_  | / __|\n / ___ \\ (_| | (_) | | | | \\__ \\ |_| \\__ \\\n/_/   \\_\\__,_|\\___/|_| |_|_|___/\\___/|___/\n")
 
   /**
    * Ensuring that defined path exists

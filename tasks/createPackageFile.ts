@@ -8,7 +8,6 @@
 */
 
 import ora from 'ora'
-import { basename } from 'path'
 import { PackageFile, logger } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
@@ -22,7 +21,7 @@ import { packages } from '../src/schematics/packages'
 const task: TaskFn = async (absPath, _app, state) => {
   const pkg = new PackageFile(absPath)
 
-  pkg.set('name', basename(absPath))
+  pkg.set('name', state.name)
   pkg.set('version', '0.0.0')
   pkg.set('private', true)
 
