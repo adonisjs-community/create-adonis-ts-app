@@ -8,8 +8,8 @@
 | files and just make sure to import them inside this file. For example
 |
 | Define routes in following two files
-├── start/routes/cart.ts
-├── start/routes/customer.ts
+| ├── start/routes/cart.ts
+| ├── start/routes/customer.ts
 |
 | and then import them inside `start/routes/index.ts` as follows
 |
