@@ -23,6 +23,7 @@ export type TaskFn = (
  */
 export type CliState = {
   baseName: string,
+  client: 'yarn' | 'npm',
   boilerplate: 'web' | 'api',
   name: string,
   eslint: boolean,

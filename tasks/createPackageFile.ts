@@ -31,8 +31,7 @@ const task: TaskFn = async (absPath, _app, state) => {
   /**
    * Set by `yarn create`
    */
-  const useYarn = process.env.npm_execpath && process.env.npm_execpath.includes('yarn')
-  if (useYarn) {
+  if (state.client === 'yarn') {
     pkg.yarn(true)
   }
 
@@ -88,7 +87,7 @@ const task: TaskFn = async (absPath, _app, state) => {
   spinner && spinner!.stopAndPersist()
 
   if (response && response.status === 1) {
-    const errorMessage = useYarn ? 'yarn install failed' : 'npm install failed'
+    const errorMessage = state.client === 'yarn' ? 'yarn install failed' : 'npm install failed'
     logger.fatal({ message: errorMessage, stack: response.stderr.toString() })
     throw new Error('Installation failed')
   } else {
