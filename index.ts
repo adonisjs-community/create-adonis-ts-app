@@ -49,7 +49,7 @@ export async function runTasks (args: string[]) {
     baseName: projectRoot,
     boilerplate: argv.boilerplate,
     name: argv.name,
-    tslint: argv.tslint,
+    eslint: argv.eslint,
   }
 
   /**
@@ -82,8 +82,8 @@ export async function runTasks (args: string[]) {
    * Ask for project name. We can fill it inside the `package.json`
    * file
    */
-  if (state.tslint === null) {
-    state.tslint = await new Prompt().confirm('Setup tslint?')
+  if (state.eslint === null) {
+    state.eslint = await new Prompt().confirm('Setup eslint?')
   }
 
   /* eslint-disable-next-line */

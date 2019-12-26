@@ -25,5 +25,5 @@ export type CliState = {
   baseName: string,
   boilerplate: 'web' | 'api',
   name: string,
-  tslint: boolean,
+  eslint: boolean,
 }

@@ -9,7 +9,7 @@
 
 import greet from './greet'
 import createRcFile from './createRcFile'
-import createTsLint from './createTslint'
+import createEslint from './createEslint'
 import copyTemplates from './copyTemplates'
 import createEnvFile from './createEnvFile'
 import createTsConfig from './createTsConfig'
@@ -26,7 +26,7 @@ export const tasks = [
   createEnvFile,
   createGitIgnore,
   createTsConfig,
-  createTsLint,
+  createEslint,
   copyTemplates,
   createEditorConfig,
   createPackageFile,
