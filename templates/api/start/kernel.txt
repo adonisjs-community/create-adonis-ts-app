@@ -22,7 +22,7 @@ import Server from '@ioc:Adonis/Core/Server'
 */
 Server.middleware.register([
   'App/Middleware/SpoofAccept',
-  'Adonis/Addons/BodyParserMiddleware',
+  'Adonis/Core/BodyParserMiddleware',
 ])
 
 /*
