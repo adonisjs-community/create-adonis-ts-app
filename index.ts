@@ -56,16 +56,20 @@ export async function runTasks (args: string[]) {
    * Ask for the project structure
    */
   if (!state.boilerplate) {
-    state.boilerplate = await new Prompt().choice('Select the project structure', [
-      {
-        name: 'api',
-        message: 'API Server',
-      },
-      {
-        name: 'web',
-        message: 'Web Application',
-      },
-    ])
+    try {
+      state.boilerplate = await new Prompt().choice('Select the project structure', [
+        {
+          name: 'api',
+          message: 'API Server',
+        },
+        {
+          name: 'web',
+          message: 'Web Application',
+        },
+      ])
+    } catch (_) {
+      process.exit(1)
+    }
   }
 
   /**
@@ -73,9 +77,13 @@ export async function runTasks (args: string[]) {
    * file
    */
   if (!state.name) {
-    state.name = await new Prompt().ask('Enter the project name', {
-      default: basename(absPath),
-    })
+    try {
+      state.name = await new Prompt().ask('Enter the project name', {
+        default: basename(absPath),
+      })
+    } catch (_) {
+      process.exit(1)
+    }
   }
 
   /**
@@ -83,7 +91,11 @@ export async function runTasks (args: string[]) {
    * file
    */
   if (state.eslint === null) {
-    state.eslint = await new Prompt().confirm('Setup eslint?')
+    try {
+      state.eslint = await new Prompt().confirm('Setup eslint?')
+    } catch (_) {
+      process.exit(1)
+    }
   }
 
   /* eslint-disable-next-line */
