@@ -24,9 +24,6 @@ export const packages: {
     '@adonisjs/ace': {
       version: '^6.0.0',
     },
-    '@adonisjs/bodyparser': {
-      version: '^3.0.0',
-    },
     '@adonisjs/session': {
       version: '^2.0.0',
     },
@@ -43,9 +40,6 @@ export const packages: {
     },
     '@adonisjs/fold': {
       version: '^6.0.0',
-    },
-    '@adonisjs/bodyparser': {
-      version: '^3.0.0',
     },
   },
 }
