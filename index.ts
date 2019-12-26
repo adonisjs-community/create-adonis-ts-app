@@ -23,9 +23,9 @@ import { CliState } from './src/contracts'
 export async function runTasks (args: string[]) {
   const argv = getops(args, {
     string: ['boilerplate', 'name'],
-    boolean: ['tslint'],
+    boolean: ['eslint'],
     default: {
-      tslint: null,
+      eslint: null,
     },
   })
 
