@@ -10,12 +10,26 @@
 import getops from 'getopts'
 import { Prompt } from '@poppinss/prompts'
 import { isAbsolute, join, basename } from 'path'
-import { isEmptyDir, logger } from '@adonisjs/sink'
+import { isEmptyDir, logger, colors } from '@adonisjs/sink'
 import { ensureDirSync, removeSync } from 'fs-extra'
 import { Application } from '@adonisjs/application/build/standalone'
 
 import { tasks } from './tasks'
 import { CliState } from './src/contracts'
+
+/* eslint-disable-next-line */
+const BADGE = "    _       _             _         _     \n   / \\   __| | ___  _ __ (_)___    | |___ \n  / _ \\ / _` |/ _ \\| '_ \\| / __|_  | / __|\n / ___ \\ (_| | (_) | | | | \\__ \\ |_| \\__ \\\n/_/   \\_\\__,_|\\___/|_| |_|_|___/\\___/|___/\n"
+
+/**
+ * Help screen output
+ */
+const HELP = `${colors.green('npx create-adonis-ts-app')} ${colors.dim('<project-name>')}
+
+${colors.yellow('Options')}
+${colors.green('--boilerplate')} ${colors.green('<api,web>')}    ${colors.dim('Choose API boilerplate')}
+${colors.green('--name')} ${colors.green('<string>')}            ${colors.dim('Define custom application name')}
+${colors.green('--eslint')} ${colors.green('<boolean>')}         ${colors.dim('Enable/disable eslint setup')}
+`
 
 /**
  * Running all the tasks to create a new project.
@@ -29,11 +43,13 @@ export async function runTasks (args: string[]) {
     },
   })
 
+  console.log(BADGE)
+
   /**
    * Ensure project name is defined
    */
   if (!argv._.length) {
-    logger.error('Project name is required to create a new app')
+    console.log(HELP)
     return
   }
 
@@ -97,9 +113,6 @@ export async function runTasks (args: string[]) {
       process.exit(1)
     }
   }
-
-  /* eslint-disable-next-line */
-  console.log("    _       _             _         _     \n   / \\   __| | ___  _ __ (_)___    | |___ \n  / _ \\ / _` |/ _ \\| '_ \\| / __|_  | / __|\n / ___ \\ (_| | (_) | | | | \\__ \\ |_| \\__ \\\n/_/   \\_\\__,_|\\___/|_| |_|_|___/\\___/|___/\n")
 
   /**
    * Ensuring that defined path exists
