@@ -21,8 +21,9 @@ const task: TaskFn = (absPath, _app, state) => {
   rcFile.set('typescript', true)
   rcFile.set('commands', ['./commands'])
   rcFile.setExceptionHandler('App/Exceptions/Handler')
-  rcFile.setAutoload('App', 'app')
-  rcFile.setAutoload('Contracts', 'contracts')
+  rcFile.setAlias('App', 'app')
+  rcFile.setAlias('Contracts', 'contracts')
+  rcFile.setAlias('Config', 'config')
 
   rcFile.setPreload('./start/routes')
   rcFile.setPreload('./start/kernel')
