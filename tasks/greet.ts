@@ -18,7 +18,7 @@ const task: TaskFn = async (_absPath, _app, state) => {
   console.log('🎉 Successfully created the project')
   console.log('👉 Execute following commands to get started')
 
-  console.log(`   ${kleur.gray('$')} ${kleur.cyan(`cd ${state.name}`)}`)
+  console.log(`   ${kleur.gray('$')} ${kleur.cyan(`cd ${state.baseName}`)}`)
   console.log(`   ${kleur.gray('$')} ${kleur.cyan('node ace serve --watch')}`)
   console.log('')
 }
