@@ -27,6 +27,7 @@ const task: TaskFn = (absPath, _app, state) => {
 
   rcFile.setPreload('./start/routes')
   rcFile.setPreload('./start/kernel')
+  rcFile.addProvider('./providers/AppProvider')
 
   metaFiles[state.boilerplate].forEach((file) => {
     rcFile.addMetaFile(file)
