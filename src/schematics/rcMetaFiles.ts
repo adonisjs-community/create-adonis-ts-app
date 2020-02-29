@@ -15,13 +15,11 @@ export const metaFiles: {
   web: [
     '.env',
     '.adonisrc.json',
-    '.gitignore',
     'resources/views/**/*.edge',
     'public/**',
   ],
   api: [
     '.env',
     '.adonisrc.json',
-    '.gitignore',
   ],
 }
