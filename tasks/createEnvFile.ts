@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
 */
 
-import randomstring from 'randomstring'
+import { randomString } from '@poppinss/utils'
 import { files, logger } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
@@ -23,7 +23,7 @@ const task: TaskFn = (absPath) => {
   env.set('PORT', '3333')
   env.set('HOST', '0.0.0.0')
   env.set('NODE_ENV', 'development')
-  env.set('APP_KEY', randomstring.generate(32))
+  env.set('APP_KEY', randomString(32))
 
   env.commit()
   logger.create('.env, .env.example')
