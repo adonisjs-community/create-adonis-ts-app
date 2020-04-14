@@ -8,7 +8,7 @@
 */
 
 import ora from 'ora'
-import { PackageFile, logger } from '@adonisjs/sink'
+import { files, logger } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
 import { logInstall } from '../src/spinner'
@@ -19,7 +19,7 @@ import { packages } from '../src/schematics/packages'
  * required dependencies
  */
 const task: TaskFn = async (absPath, _app, state) => {
-  const pkg = new PackageFile(absPath)
+  const pkg = new files.PackageJsonFile(absPath)
 
   pkg.set('name', state.name)
   pkg.set('version', '0.0.0')

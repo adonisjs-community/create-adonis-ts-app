@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
 */
 
-import { JsonFile, logger, LinesFile } from '@adonisjs/sink'
+import { files, logger } from '@adonisjs/sink'
 import { TaskFn } from '../src/contracts'
 
 /**
@@ -18,11 +18,11 @@ const task: TaskFn = (absPath, _app, state) => {
     return
   }
 
-  const eslint = new JsonFile(absPath, '.eslintrc.json')
+  const eslint = new files.JsonFile(absPath, '.eslintrc.json')
   eslint.set('extends', ['plugin:adonis/typescriptApp'])
   eslint.commit()
 
-  const eslintIgnore = new LinesFile(absPath, '.eslintignore')
+  const eslintIgnore = new files.NewLineFile(absPath, '.eslintignore')
   eslintIgnore.add('build')
   eslintIgnore.commit()
 

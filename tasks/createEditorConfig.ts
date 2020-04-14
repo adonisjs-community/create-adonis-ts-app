@@ -7,14 +7,14 @@
  * file that was distributed with this source code.
 */
 
-import { IniFile, logger } from '@adonisjs/sink'
+import { files, logger } from '@adonisjs/sink'
 import { TaskFn } from '../src/contracts'
 
 /**
  * Creates `.editorconfig` inside the project root.
  */
 const task: TaskFn = (absPath) => {
-  const editorConfig = new IniFile(absPath, '.editorconfig')
+  const editorConfig = new files.IniFile(absPath, '.editorconfig')
 
   editorConfig.set('*', {
     indent_style: 'space',

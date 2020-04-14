@@ -7,14 +7,14 @@
  * file that was distributed with this source code.
 */
 
-import { JsonFile, logger } from '@adonisjs/sink'
+import { files, logger } from '@adonisjs/sink'
 import { TaskFn } from '../src/contracts'
 
 /**
  * Creates `tsconfig.json` file
  */
 const task: TaskFn = (absPath) => {
-  const tsconfig = new JsonFile(absPath, 'tsconfig.json')
+  const tsconfig = new files.JsonFile(absPath, 'tsconfig.json')
 
   tsconfig.set('include', ['**/*'])
   tsconfig.set('exclude', ['node_modules', 'build'])

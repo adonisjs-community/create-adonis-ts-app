@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
 */
 
-import { RcFile, logger } from '@adonisjs/sink'
+import { files, logger } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
 import { metaFiles } from '../src/schematics/rcMetaFiles'
@@ -16,7 +16,7 @@ import { metaFiles } from '../src/schematics/rcMetaFiles'
  * Creates the `.adonisrc.json` file in the project root
  */
 const task: TaskFn = (absPath, _app, state) => {
-  const rcFile = new RcFile(absPath)
+  const rcFile = new files.AdonisRcFile(absPath)
 
   rcFile.set('typescript', true)
   rcFile.set('commands', ['./commands'])

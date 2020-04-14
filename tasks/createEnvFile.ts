@@ -8,7 +8,7 @@
 */
 
 import randomstring from 'randomstring'
-import { EnvFile, logger } from '@adonisjs/sink'
+import { files, logger } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
 
@@ -18,7 +18,7 @@ import { TaskFn } from '../src/contracts'
  * keys
  */
 const task: TaskFn = (absPath) => {
-  const env = new EnvFile(absPath)
+  const env = new files.EnvFile(absPath)
 
   env.set('PORT', '3333')
   env.set('HOST', '0.0.0.0')

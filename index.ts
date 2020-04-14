@@ -10,7 +10,7 @@
 import getops from 'getopts'
 import { Prompt } from '@poppinss/prompts'
 import { isAbsolute, join, basename } from 'path'
-import { isEmptyDir, logger, colors } from '@adonisjs/sink'
+import { utils, logger, colors } from '@adonisjs/sink'
 import { ensureDirSync, removeSync } from 'fs-extra'
 import { Application } from '@adonisjs/application/build/standalone'
 
@@ -122,7 +122,7 @@ export async function runTasks (args: string[]) {
    */
   ensureDirSync(absPath)
 
-  if (!isEmptyDir(absPath)) {
+  if (!utils.isEmptyDir(absPath)) {
     const errors = [
       `Cannot overwrite contents of {${projectRoot}} directory.`,
       'Make sure to define path to an empty directory',

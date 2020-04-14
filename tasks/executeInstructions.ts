@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
 */
 
-import { executeInstructions, logger } from '@adonisjs/sink'
+import { tasks, logger } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
 import { packages } from '../src/schematics/packages'
@@ -28,7 +28,7 @@ const task: TaskFn = async (absPath, application, state) => {
    */
   try {
     for (let pkg of Object.keys(packages[state.boilerplate])) {
-      await executeInstructions(pkg, absPath, application)
+      await new tasks.Instructions(pkg, absPath, application).execute()
     }
   } catch (error) {
     instructionsError = error

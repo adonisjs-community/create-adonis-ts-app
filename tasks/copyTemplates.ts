@@ -9,7 +9,7 @@
 
 import { join } from 'path'
 import readDir from 'fs-readdir-recursive'
-import { TemplateFile, logger } from '@adonisjs/sink'
+import { files, logger } from '@adonisjs/sink'
 
 import { TaskFn } from '../src/contracts'
 
@@ -17,13 +17,13 @@ import { TaskFn } from '../src/contracts'
  * Copies templates to project directory
  */
 const task: TaskFn = (absPath, _app, state) => {
-  const files = readDir(join(__dirname, '..', 'templates', state.boilerplate))
+  const templateFiles = readDir(join(__dirname, '..', 'templates', state.boilerplate))
 
-  files
+  templateFiles
     .forEach((name: string) => {
       const outputFileName = name.replace(/\.txt$/, '.ts')
       const src = join(__dirname, '..', 'templates', state.boilerplate, name)
-      new TemplateFile(absPath, outputFileName, src).apply({}).commit()
+      new files.MustacheFile(absPath, outputFileName, src).apply({}).commit()
       logger.create(outputFileName)
     })
 }
