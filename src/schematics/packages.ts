@@ -28,7 +28,7 @@ export const packages: {
       version: '^2.0.0',
     },
     '@adonisjs/view': {
-      version: 'latest',
+      version: '^2.0.0',
     },
   },
   api: {

@@ -54,7 +54,7 @@ const task: TaskFn = async (absPath, _app, state) => {
    * Dev dependencies
    */
   pkg.install('typescript')
-  pkg.install('@adonisjs/assembler')
+  pkg.install('@adonisjs/assembler', '^2.0.0')
 
   if (state.eslint) {
     pkg.install('eslint')
