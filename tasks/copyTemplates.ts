@@ -27,12 +27,10 @@ const task: TaskFn = (absPath, _app, state) => {
         return
       }
 
-      if (name.endsWith('.txt')) {
-        const outputFileName = name.replace(/\.txt$/, '.ts')
-        const src = join(baseDir, name)
-        new files.MustacheFile(absPath, outputFileName, src).apply({}).commit()
-        logger.create(outputFileName)
-      }
+      const outputFileName = name.replace(/\.txt$/, '.ts')
+      const src = join(baseDir, name)
+      new files.MustacheFile(absPath, outputFileName, src).apply({}).commit()
+      logger.create(outputFileName)
     })
 }
 
