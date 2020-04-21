@@ -30,9 +30,6 @@ export const packages: {
     '@adonisjs/view': {
       version: '^2.0.0',
     },
-    '@adonisjs/shield': {
-      version: '^3.0.0',
-    },
   },
   api: {
     '@adonisjs/core': {
