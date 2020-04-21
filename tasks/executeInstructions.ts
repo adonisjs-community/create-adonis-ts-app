@@ -28,7 +28,7 @@ const task: TaskFn = async (absPath, application, state) => {
    */
   try {
     for (let pkg of Object.keys(packages[state.boilerplate])) {
-      await new tasks.Instructions(pkg, absPath, application).execute()
+      await new tasks.Instructions(pkg, absPath, application, false).execute()
     }
   } catch (error) {
     instructionsError = error
