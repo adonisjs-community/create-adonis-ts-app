@@ -24,6 +24,7 @@ const task: TaskFn = (absPath, _app, state) => {
   rcFile.setAlias('App', 'app')
   rcFile.setAlias('Contracts', 'contracts')
   rcFile.setAlias('Config', 'config')
+  rcFile.setAlias('Database', 'database')
 
   rcFile.setPreload('./start/routes')
   rcFile.setPreload('./start/kernel')

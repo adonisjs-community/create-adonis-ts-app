@@ -27,6 +27,7 @@ const task: TaskFn = (absPath) => {
     paths: {
       'App/*': ['./app/*'],
       'Contracts/*': ['./contracts/*'],
+      'Database/*': ['./database/*'],
     },
   })
 
