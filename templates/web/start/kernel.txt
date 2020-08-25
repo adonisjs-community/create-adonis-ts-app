@@ -33,7 +33,7 @@ Server.middleware.register([
 | or middleware function and key is the alias. Later you can use these
 | alias on individual routes. For example:
 |
-| { auth: 'Adonis/Auth/Middleware' }
+| { auth: 'App/Auth/Middleware' }
 |
 | and then use it as follows
 |
