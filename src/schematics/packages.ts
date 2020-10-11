@@ -16,7 +16,7 @@ export const packages: {
 } = {
   web: {
     '@adonisjs/core': {
-      version: '^5.0.0-preview-rc',
+      version: '5.0.0-preview-rc-1.12',
     },
     '@adonisjs/fold': {
       version: '^6.0.0',
@@ -33,7 +33,7 @@ export const packages: {
   },
   api: {
     '@adonisjs/core': {
-      version: '^5.0.0-preview-rc',
+      version: '5.0.0-preview-rc-1.12',
     },
     '@adonisjs/ace': {
       version: '^6.0.0',
