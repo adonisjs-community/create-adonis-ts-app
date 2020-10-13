@@ -5,7 +5,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
-*/
+ */
 
 import { files, logger } from '@adonisjs/sink'
 
@@ -15,18 +15,18 @@ import { TaskFn } from '../src/contracts'
  * Creates `.gitignore` file inside the project root.
  */
 const task: TaskFn = (absPath) => {
-  const gitignore = new files.NewLineFile(absPath, '.gitignore')
+	const gitignore = new files.NewLineFile(absPath, '.gitignore')
 
-  gitignore.add('node_modules')
-  gitignore.add('build')
-  gitignore.add('coverage')
-  gitignore.add('.vscode')
-  gitignore.add('.DS_STORE')
-  gitignore.add('.env')
-  gitignore.add('tmp')
+	gitignore.add('node_modules')
+	gitignore.add('build')
+	gitignore.add('coverage')
+	gitignore.add('.vscode')
+	gitignore.add('.DS_STORE')
+	gitignore.add('.env')
+	gitignore.add('tmp')
 
-  gitignore.commit()
-  logger.create('.gitignore')
+	gitignore.commit()
+	logger.create('.gitignore')
 }
 
 export default task

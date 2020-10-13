@@ -5,7 +5,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
-*/
+ */
 
 import greet from './greet'
 import createRcFile from './createRcFile'
@@ -22,14 +22,14 @@ import executeInstructions from './executeInstructions'
  * An array of tasks to be executed in chronological order
  */
 export const tasks = [
-  createRcFile,
-  createEnvFile,
-  createGitIgnore,
-  createTsConfig,
-  createEslint,
-  copyTemplates,
-  createEditorConfig,
-  createPackageFile,
-  executeInstructions,
-  greet,
+	createRcFile,
+	createEnvFile,
+	createGitIgnore,
+	createTsConfig,
+	createEslint,
+	copyTemplates,
+	createEditorConfig,
+	createPackageFile,
+	executeInstructions,
+	greet,
 ]
