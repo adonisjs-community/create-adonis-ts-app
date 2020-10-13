@@ -16,30 +16,18 @@ export const packages: {
 } = {
 	web: {
 		'@adonisjs/core': {
-			version: '5.0.2-beta-rc',
-		},
-		'@adonisjs/fold': {
-			version: '^6.0.0',
-		},
-		'@adonisjs/ace': {
-			version: '^6.0.0',
+			version: '^5.0.2-beta-rc',
 		},
 		'@adonisjs/session': {
-			version: '^3.0.0',
+			version: '^4.0.0',
 		},
 		'@adonisjs/view': {
-			version: '^2.0.0',
+			version: '^3.0.0',
 		},
 	},
 	api: {
 		'@adonisjs/core': {
-			version: '5.0.0-preview-rc-1.12',
-		},
-		'@adonisjs/ace': {
-			version: '^6.0.0',
-		},
-		'@adonisjs/fold': {
-			version: '^6.0.0',
+			version: '^5.0.2-beta-rc',
 		},
 	},
 }

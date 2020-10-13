@@ -9,27 +9,30 @@
 
 import { join } from 'path'
 import { fsReadAll } from '@poppinss/utils'
-import { files, utils, logger } from '@adonisjs/sink'
+import { utils, files } from '@adonisjs/sink'
 
-import { TaskFn } from '../src/contracts'
+import { TaskFn } from '../../src/contracts'
 
 /**
- * Copies templates to project directory
+ * Copy boilerplate files to the destination
  */
-const task: TaskFn = (absPath, _app, state) => {
-	const baseDir = join(__dirname, '..', 'templates', state.boilerplate)
+const task: TaskFn = (_, logger, { boilerplate, absPath }) => {
+	const baseDir = join(__dirname, '..', '..', 'templates', boilerplate)
 	const templateFiles = fsReadAll(baseDir, () => true)
 
 	templateFiles.forEach((name: string) => {
 		if (name.endsWith('.ico')) {
-			utils.copyFiles(baseDir, absPath, [name])
+			utils.copyFiles(baseDir, absPath, [name]).forEach(({ filePath, state }) => {
+				const action = logger.action('create')
+				state === 'copied' ? action.succeeded(filePath) : action.skipped(filePath)
+			})
 			return
 		}
 
 		const outputFileName = name.replace(/\.txt$/, '.ts')
 		const src = join(baseDir, name)
 		new files.MustacheFile(absPath, outputFileName, src).apply({}).commit()
-		logger.create(outputFileName)
+		logger.action('create').succeeded(outputFileName)
 	})
 }
 

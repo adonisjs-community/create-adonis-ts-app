@@ -7,15 +7,18 @@
  * file that was distributed with this source code.
  */
 
-import { files, logger } from '@adonisjs/sink'
-import { TaskFn } from '../src/contracts'
+import { files } from '@adonisjs/sink'
+import { TaskFn } from '../../src/contracts'
 
 /**
- * Creates `.editorconfig` inside the project root.
+ * Create `.editorconfig` inside destination
  */
-const task: TaskFn = (absPath) => {
+const task: TaskFn = (_, logger, { absPath }) => {
 	const editorConfig = new files.IniFile(absPath, '.editorconfig')
 
+	/**
+	 * All files
+	 */
 	editorConfig.set('*', {
 		indent_style: 'space',
 		indent_size: 2,
@@ -25,16 +28,22 @@ const task: TaskFn = (absPath) => {
 		insert_final_newline: true,
 	})
 
+	/**
+	 * JSON file
+	 */
 	editorConfig.set('*.json', {
 		insert_final_newline: 'ignore',
 	})
 
+	/**
+	 * Markdown files
+	 */
 	editorConfig.set('*.md', {
 		trim_trailing_whitespace: false,
 	})
 
 	editorConfig.commit()
-	logger.create('.editorconfig')
+	logger.action('create').succeeded('.editorconfig')
 }
 
 export default task

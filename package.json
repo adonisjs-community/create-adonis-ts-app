@@ -73,13 +73,13 @@
   },
   "dependencies": {
     "@adonisjs/application": "^3.0.18",
-    "@adonisjs/sink": "^4.1.0",
+    "@adonisjs/sink": "^4.1.3",
     "@poppinss/prompts": "^1.1.7",
     "@poppinss/utils": "^2.5.7",
+    "@types/fs-extra": "^9.0.2",
     "cli-width": "^3.0.0",
     "fs-extra": "^9.0.1",
-    "getopts": "^2.2.5",
-    "ora": "^5.1.0"
+    "getopts": "^2.2.5"
   },
   "repository": {
     "type": "git",

@@ -7,14 +7,15 @@
  * file that was distributed with this source code.
  */
 
+import { logger as sinkLogger, files } from '@adonisjs/sink'
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 
 /**
  * Shape of task functions
  */
 export type TaskFn = (
-	absPath: string,
 	application: ApplicationContract,
+	logger: typeof sinkLogger,
 	state: CliState
 ) => void | Promise<void>
 
@@ -23,8 +24,11 @@ export type TaskFn = (
  */
 export type CliState = {
 	baseName: string
+	absPath: string
 	client: 'yarn' | 'npm'
 	boilerplate: 'web' | 'api'
-	name: string
+	projectName: string
 	eslint: boolean
+	prettier: boolean
+	pkg: files.PackageJsonFile
 }

@@ -7,29 +7,38 @@
  * file that was distributed with this source code.
  */
 
-import greet from './greet'
-import createRcFile from './createRcFile'
-import createEslint from './createEslint'
-import copyTemplates from './copyTemplates'
-import createEnvFile from './createEnvFile'
-import createTsConfig from './createTsConfig'
-import createGitIgnore from './createGitIgnore'
-import createPackageFile from './createPackageFile'
-import createEditorConfig from './createEditorConfig'
-import executeInstructions from './executeInstructions'
+import createRcFile from './Scaffold/createRcFile'
+import setupEslint from './Scaffold/setupEslint'
+import setupPrettier from './Scaffold/setupPrettier'
+import copyTemplates from './Scaffold/copyTemplates'
+import createTsConfig from './Scaffold/createTsConfig'
+import createGitIgnore from './Scaffold/createGitIgnore'
+import configurePackages from './ConfigurePackages'
+import createEditorConfig from './Scaffold/createEditorConfig'
+import installDependencies from './InstallDependencies'
 
 /**
  * An array of tasks to be executed in chronological order
  */
 export const tasks = [
-	createRcFile,
-	createEnvFile,
-	createGitIgnore,
-	createTsConfig,
-	createEslint,
-	copyTemplates,
-	createEditorConfig,
-	createPackageFile,
-	executeInstructions,
-	greet,
+	{
+		title: 'Scaffold project',
+		actions: [
+			copyTemplates,
+			createEditorConfig,
+			createGitIgnore,
+			createRcFile,
+			createTsConfig,
+			setupEslint,
+			setupPrettier,
+		],
+	},
+	{
+		title: 'Install dependencies',
+		actions: [installDependencies],
+	},
+	{
+		title: 'Configure installed packages',
+		actions: [configurePackages],
+	},
 ]

@@ -8,161 +8,127 @@
  */
 
 import getops from 'getopts'
-import { Prompt } from '@poppinss/prompts'
-import { isAbsolute, join, basename } from 'path'
-import { utils, logger, colors } from '@adonisjs/sink'
-import { ensureDirSync, removeSync } from 'fs-extra'
-import { Application } from '@adonisjs/application/build/standalone'
+import { removeSync } from 'fs-extra'
+import { Application } from '@adonisjs/application'
+import { utils, logger, tasksUi } from '@adonisjs/sink'
 
-import { tasks } from './tasks'
-import { CliState } from './src/contracts'
-
-const USING_YARN = !!(process.env.npm_execpath && process.env.npm_execpath.includes('yarn'))
-
-/* eslint-disable-next-line */
-const BADGE =
-	"    _       _             _         _     \n   / \\   __| | ___  _ __ (_)___    | |___ \n  / _ \\ / _` |/ _ \\| '_ \\| / __|_  | / __|\n / ___ \\ (_| | (_) | | | | \\__ \\ |_| \\__ \\\n/_/   \\_\\__,_|\\___/|_| |_|_|___/\\___/|___/\n"
-
-/**
- * Help screen output
- */
-const HELP = `${colors.green(
-	USING_YARN ? 'yarn create adonis-ts-app' : 'npx create-adonis-ts-app'
-)} ${colors.dim('<project-name>')}
-
-${colors.yellow('Options')}
-${colors.green('--boilerplate')} ${colors.green('<api,web>')}    ${colors.dim(
-	'Choose API boilerplate'
-)}
-${colors.green('--name')} ${colors.green('<string>')}            ${colors.dim(
-	'Define custom application name'
-)}
-${colors.green('--eslint')} ${colors.green('<boolean>')}         ${colors.dim(
-	'Enable/disable eslint setup'
-)}
-`
+import { tasks } from './Tasks'
+import { greet } from './src/Chalk/greet'
+import { showArt } from './src/Chalk/art'
+import { getHelp } from './src/Chalk/help'
+import { getState, usingYarn } from './src/Helpers'
 
 /**
  * Running all the tasks to create a new project.
  */
 export async function runTasks(args: string[]) {
+	showArt()
+
+	/**
+	 * Setup command line arguments
+	 */
 	const argv = getops(args, {
 		string: ['boilerplate', 'name'],
-		boolean: ['eslint'],
+		boolean: ['eslint', 'verbose', 'prettier'],
 		default: {
 			eslint: null,
+			verbose: false,
+			prettier: null,
 		},
 	})
 
-	console.log(BADGE)
-
 	/**
-	 * Ensure project name is defined
+	 * Show help when no arguments are passed
 	 */
 	if (!argv._.length) {
-		console.log(HELP)
+		console.log(getHelp(usingYarn))
 		return
 	}
 
-	const projectRoot = argv._[0].trim()
+	/**
+	 * First argument is the project path
+	 */
+	const projectPath = argv._[0].trim()
+
+	console.log('')
+	console.log(logger.colors.green('CUSTOMIZE PROJECT'))
 
 	/**
-	 * If project root is not absolute, then we derive it from the current
-	 * working directory
+	 * Setup state
 	 */
-	const absPath = isAbsolute(projectRoot) ? projectRoot : join(process.cwd(), projectRoot)
-
-	let state: CliState = {
-		baseName: projectRoot,
+	const state = await getState(projectPath, {
+		client: usingYarn ? 'yarn' : 'npm',
+		projectName: argv.name,
 		boilerplate: argv.boilerplate,
-		name: argv.name,
 		eslint: argv.eslint,
-		client: USING_YARN ? 'yarn' : 'npm',
-	}
+		prettier: argv.prettier,
+	})
 
 	/**
-	 * Ask for the project structure
+	 * Return when directory is not empty
 	 */
-	if (!state.boilerplate) {
-		try {
-			state.boilerplate = await new Prompt().choice('Select the project structure', [
-				{
-					name: 'api',
-					message: 'API Server',
-				},
-				{
-					name: 'web',
-					message: 'Web Application',
-				},
-			])
-		} catch (_) {
-			process.exit(1)
-		}
-	}
-
-	/**
-	 * Ask for project name. We can fill it inside the `package.json`
-	 * file
-	 */
-	if (!state.name) {
-		try {
-			state.name = await new Prompt().ask('Enter the project name', {
-				default: basename(absPath),
-			})
-		} catch (_) {
-			process.exit(1)
-		}
-	}
-
-	/**
-	 * Ask for project name. We can fill it inside the `package.json`
-	 * file
-	 */
-	if (state.eslint === null) {
-		try {
-			state.eslint = await new Prompt().confirm('Setup eslint?')
-		} catch (_) {
-			process.exit(1)
-		}
-	}
-
-	/**
-	 * Ensuring that defined path exists
-	 */
-	ensureDirSync(absPath)
-
-	if (!utils.isEmptyDir(absPath)) {
+	if (!utils.isEmptyDir(state.absPath)) {
 		const errors = [
-			`Cannot overwrite contents of {${projectRoot}} directory.`,
+			`Cannot overwrite contents of {${projectPath}} directory.`,
 			'Make sure to define path to an empty directory',
 		]
 
+		console.log('')
 		logger.error(errors.join(' '))
 		return
 	}
 
 	/**
-	 * Set environment variables that can be used by the packages
-	 * to tweak their setup behavior
-	 */
-	process.env['ADONIS_CREATE_APP_NAME'] = state.name
-	process.env['ADONIS_CREATE_ESLINT'] = String(state.eslint)
-	process.env['ADONIS_CREATE_APP_CLIENT'] = state.client
-	process.env['ADONIS_CREATE_APP_BOILERPLATE'] = state.boilerplate
-
-	/**
 	 * Setup application
 	 */
-	const application = new Application(absPath, {} as any, {}, {})
+	const application = new Application(state.absPath, 'console', {
+		typescript: true,
+	})
 
-	for (let task of tasks) {
-		try {
-			await task(absPath, application, state)
-		} catch (err) {
-			logger.error('Unable to create new project. Rolling back')
-			logger.fatal(err)
-			removeSync(absPath)
-			return
-		}
+	/**
+	 * Decide the ui renderer to use
+	 */
+	const tasksManager = argv.verbose ? tasksUi.verbose() : tasksUi()
+
+	/**
+	 * Execute all tasks
+	 */
+	tasks.forEach(({ title, actions }) => {
+		tasksManager.add(title, async (taskLogger, task) => {
+			for (let action of actions) {
+				await action(application, taskLogger, state)
+			}
+			await task.complete()
+		})
+	})
+
+	console.log('')
+	console.log(logger.colors.green('RUNNING TASKS'))
+
+	/**
+	 * Run tasks
+	 */
+	try {
+		await tasksManager.run()
+	} catch (error) {
+		tasksManager.state = 'failed'
+		tasksManager.error = error
 	}
+
+	console.log('')
+
+	/**
+	 * Notify about failure
+	 */
+	if (tasksManager.state === 'failed') {
+		logger.error('Unable to create project. Cleaning up')
+		removeSync(state.absPath)
+		return
+	}
+
+	/**
+	 * Greet the user to get started
+	 */
+	logger.success('Project created successfully')
+	greet(state)
 }
