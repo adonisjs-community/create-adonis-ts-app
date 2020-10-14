@@ -29,7 +29,7 @@ const task: TaskFn = (_, logger, { absPath, prettier, eslint, pkg }) => {
 	prettierRc.set('quoteProps', 'consistent')
 	prettierRc.set('bracketSpacing', true)
 	prettierRc.set('arrowParens', 'always')
-	prettierRc.set('printWidth', 10)
+	prettierRc.set('printWidth', 100)
 	prettierRc.commit()
 
 	/**
