@@ -70,7 +70,11 @@
   },
   "bin": {
     "create-adonis-ts-app": "build/bin/run.js"
-  },
+	},
+	"publishConfig": {
+		"access": "public",
+		"tag": "next"
+	},
   "dependencies": {
     "@adonisjs/application": "^3.0.18",
     "@adonisjs/sink": "^4.1.3",
