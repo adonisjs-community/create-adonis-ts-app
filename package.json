@@ -6,7 +6,7 @@
   "files": [
     "build/bin",
     "build/src",
-    "build/tasks",
+    "build/Tasks",
     "build/templates",
     "build/index.d.ts",
     "build/index.js"
