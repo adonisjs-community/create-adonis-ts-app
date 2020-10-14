@@ -18,6 +18,9 @@ export const packages: {
 		'@adonisjs/core': {
 			version: '^5.0.2-beta-rc',
 		},
+		'@adonisjs/repl': {
+			version: '^1.0.0',
+		},
 		'@adonisjs/session': {
 			version: '^4.0.0',
 		},
@@ -28,6 +31,9 @@ export const packages: {
 	api: {
 		'@adonisjs/core': {
 			version: '^5.0.2-beta-rc',
+		},
+		'@adonisjs/repl': {
+			version: '^1.0.0',
 		},
 	},
 }
