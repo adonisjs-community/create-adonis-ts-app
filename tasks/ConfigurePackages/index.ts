@@ -7,6 +7,7 @@
  * file that was distributed with this source code.
  */
 
+import execa from 'execa'
 import { tasks } from '@adonisjs/sink'
 import { TaskFn } from '../../src/contracts'
 import { packages } from '../../src/Schematics/packages'
@@ -38,6 +39,25 @@ const task: TaskFn = async (application, logger, { boilerplate, absPath }) => {
 		logger.fatal(instructionsError)
 		throw instructionsError
 	}
+
+	/**
+	 * Generate ace file in the newly created project
+	 */
+	const subprocess = execa.node('ace', ['generate:manifest'], {
+		cwd: process.cwd(),
+		env: {
+			FORCE_COLOR: 'true',
+		},
+	})
+	subprocess.stdout!.pipe(process.stdout)
+
+	/**
+	 * Generating ace-manifest file is a secondary action and errors
+	 * can be ignored
+	 */
+	try {
+		await subprocess
+	} catch {}
 }
 
 export default task
