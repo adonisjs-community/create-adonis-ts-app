@@ -13,7 +13,7 @@ import { TaskFn } from '../../src/contracts'
 /**
  * Setup eslint inside the project
  */
-const task: TaskFn = (_, logger, { absPath, eslint, pkg }) => {
+const task: TaskFn = (_, logger, { absPath, prettier, eslint, pkg }) => {
 	if (!eslint) {
 		return
 	}
@@ -22,7 +22,25 @@ const task: TaskFn = (_, logger, { absPath, eslint, pkg }) => {
 	 * Create eslintRc file
 	 */
 	const eslintRc = new files.JsonFile(absPath, '.eslintrc.json')
-	eslintRc.set('extends', ['plugin:adonis/typescriptApp'])
+
+	/**
+	 * Setup config for prettier
+	 */
+	if (prettier) {
+		eslintRc.set('extends', [
+			'plugin:adonis/typescriptApp',
+			'prettier',
+			'prettier/@typescript-eslint',
+		])
+		eslintRc.set('plugins', ['prettier'])
+		eslintRc.set('rules', {
+			'prettier/prettier': ['error'],
+		})
+	} else {
+		// or setup without prettier
+		eslintRc.set('extends', ['plugin:adonis/typescriptApp'])
+	}
+
 	eslintRc.commit()
 
 	/**
