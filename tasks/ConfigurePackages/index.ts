@@ -44,7 +44,7 @@ const task: TaskFn = async (application, logger, { boilerplate, absPath }) => {
 	 * Generate ace file in the newly created project
 	 */
 	const subprocess = execa.node('ace', ['generate:manifest'], {
-		cwd: process.cwd(),
+		cwd: absPath,
 		env: {
 			FORCE_COLOR: 'true',
 		},
