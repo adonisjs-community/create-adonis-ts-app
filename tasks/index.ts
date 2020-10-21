@@ -7,15 +7,17 @@
  * file that was distributed with this source code.
  */
 
-import createRcFile from './Scaffold/createRcFile'
+import formatSource from './FormatSource'
 import setupEslint from './Scaffold/setupEslint'
+import generateManifest from './GenerateManifest'
+import createRcFile from './Scaffold/createRcFile'
+import configurePackages from './ConfigurePackages'
 import setupPrettier from './Scaffold/setupPrettier'
 import copyTemplates from './Scaffold/copyTemplates'
 import createTsConfig from './Scaffold/createTsConfig'
-import createGitIgnore from './Scaffold/createGitIgnore'
-import configurePackages from './ConfigurePackages'
-import createEditorConfig from './Scaffold/createEditorConfig'
 import installDependencies from './InstallDependencies'
+import createGitIgnore from './Scaffold/createGitIgnore'
+import createEditorConfig from './Scaffold/createEditorConfig'
 
 /**
  * An array of tasks to be executed in chronological order
@@ -39,6 +41,6 @@ export const tasks = [
 	},
 	{
 		title: 'Configure installed packages',
-		actions: [configurePackages],
+		actions: [configurePackages, generateManifest, formatSource],
 	},
 ]

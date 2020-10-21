@@ -43,20 +43,20 @@ const task: TaskFn = async (application, logger, { boilerplate, absPath }) => {
 	/**
 	 * Generate ace file in the newly created project
 	 */
-	const subprocess = execa.node('ace', ['generate:manifest'], {
+	const manifest = execa.node('ace', ['generate:manifest'], {
 		cwd: absPath,
 		env: {
 			FORCE_COLOR: 'true',
 		},
 	})
-	subprocess.stdout!.pipe(process.stdout)
+	manifest.stdout!.pipe(process.stdout)
 
 	/**
 	 * Generating ace-manifest file is a secondary action and errors
 	 * can be ignored
 	 */
 	try {
-		await subprocess
+		await manifest
 	} catch {}
 }
 
