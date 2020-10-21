@@ -16,7 +16,7 @@ export const packages: {
 } = {
 	web: {
 		'@adonisjs/core': {
-			version: '^5.0.2-beta-rc',
+			version: '^5.0.3-beta-rc',
 		},
 		'@adonisjs/repl': {
 			version: '^1.0.0',
@@ -30,7 +30,7 @@ export const packages: {
 	},
 	api: {
 		'@adonisjs/core': {
-			version: '^5.0.2-beta-rc',
+			version: '^5.0.3-beta-rc',
 		},
 		'@adonisjs/repl': {
 			version: '^1.0.0',
