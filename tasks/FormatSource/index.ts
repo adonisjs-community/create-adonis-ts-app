@@ -19,19 +19,13 @@ const task: TaskFn = async (_, __, { absPath, prettier }) => {
 	}
 
 	/**
-	 * Generate ace-manifest file in the newly created project
-	 */
-	const format = execa('npm', ['run', 'format'], {
-		cwd: absPath,
-	})
-	format.stdout!.pipe(process.stdout)
-
-	/**
-	 * Formatting source is a secondary action and errors can be
+	 * Formatting source files is a secondary action and errors can be
 	 * ignored
 	 */
 	try {
-		await format
+		await execa('npm', ['run', 'format'], {
+			cwd: absPath,
+		})
 	} catch {}
 }
 

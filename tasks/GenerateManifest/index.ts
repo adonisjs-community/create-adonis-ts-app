@@ -15,22 +15,13 @@ import { TaskFn } from '../../src/contracts'
  */
 const task: TaskFn = async (_, __, { absPath }) => {
 	/**
-	 * Generate ace-manifest file in the newly created project
-	 */
-	const manifest = execa.node('ace', ['generate:manifest'], {
-		cwd: absPath,
-		env: {
-			FORCE_COLOR: 'true',
-		},
-	})
-	manifest.stdout!.pipe(process.stdout)
-
-	/**
 	 * Generating ace-manifest file is a secondary action and errors
 	 * can be ignored
 	 */
 	try {
-		await manifest
+		await execa.node('ace', ['generate:manifest'], {
+			cwd: absPath,
+		})
 	} catch {}
 }
 
