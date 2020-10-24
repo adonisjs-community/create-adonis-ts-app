@@ -73,7 +73,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "tag": "next"
+    "tag": "latest"
   },
   "dependencies": {
     "@adonisjs/application": "^3.0.20",
