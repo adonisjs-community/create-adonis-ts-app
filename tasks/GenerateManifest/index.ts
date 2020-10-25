@@ -19,7 +19,7 @@ const task: TaskFn = async (_, __, { absPath }) => {
 	 * can be ignored
 	 */
 	try {
-		await execa.node('ace', ['generate:manifest'], {
+		await execa('node', ['ace', 'generate:manifest'], {
 			cwd: absPath,
 		})
 	} catch {}
