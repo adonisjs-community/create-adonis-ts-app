@@ -36,6 +36,7 @@ const task: TaskFn = async (_, logger, { pkg, client, boilerplate }) => {
 	 */
 	pkg.install('proxy-addr', 'latest', false)
 	pkg.install('reflect-metadata', 'latest', false)
+	pkg.install('source-map-support', 'latest', false)
 
 	/**
 	 * Required dev dependencies
