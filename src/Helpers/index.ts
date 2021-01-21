@@ -103,7 +103,7 @@ export async function getState(
 	pkg.set('version', '1.0.0')
 	pkg.set('private', true)
 	pkg.setScript('build', 'node ace build --production')
-	pkg.setScript('start', 'node server.js')
+	pkg.setScript('start', 'node server.ts')
 	pkg.setScript('dev', 'node ace serve --watch')
 
 	/**
