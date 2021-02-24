@@ -41,7 +41,7 @@ const task: TaskFn = async (_, logger, { pkg, client, boilerplate }) => {
 	/**
 	 * Required dev dependencies
 	 */
-	pkg.install('typescript')
+	pkg.install('typescript', '~4.1')
 	pkg.install('youch')
 	pkg.install('youch-terminal')
 	pkg.install('pino-pretty')
