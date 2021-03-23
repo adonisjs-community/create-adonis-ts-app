@@ -8,8 +8,8 @@
  */
 
 import { join } from 'path'
-import { fsReadAll } from '@poppinss/utils'
 import { utils, files } from '@adonisjs/sink'
+import { fsReadAll } from '@poppinss/utils/build/helpers'
 
 import { TaskFn } from '../../src/contracts'
 
