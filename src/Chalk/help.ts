@@ -30,6 +30,6 @@ ${logger.colors.green('--eslint')} ${logger.colors.dim('boolean')}          ${lo
 ${logger.colors.green('--prettier')} ${logger.colors.dim('boolean')}        ${logger.colors.dim(
 	'Enable/disable prettier setup'
 )}
-${logger.colors.green('--verbose')} ${logger.colors.dim('boolean')}         ${logger.colors.dim(
-	'Turn on the verbose mode'
+${logger.colors.green('--debug')} ${logger.colors.dim('boolean')}         ${logger.colors.dim(
+	'Turn on the debug mode'
 )}`
