@@ -4,6 +4,15 @@
 
 <br />
 
+<div align="center">
+
+[![npm-image]][npm-url] ![][typescript-image] [![license-image]][license-url] [![synk-image]][synk-url]
+
+</div>
+
+<br />
+
+
 # Create AdonisJS App
 > AdonisJS Typescript starter template
 
@@ -100,3 +109,18 @@ Debug the project creation process. This flag will use the verbose output for be
 ```sh
 npm init adonis-ts-app hello-world --debug
 ```
+
+<div align="center">
+  <sub>Built with ❤︎ by <a href="https://github.com/thetutlage">Harminder Virk</a>
+</div>
+
+[npm-image]: https://img.shields.io/npm/v/create-adonis-ts-app/latest.svg?style=for-the-badge&logo=npm
+[npm-url]: https://www.npmjs.com/package/create-adonis-ts-app/v/alpha "npm"
+
+[typescript-image]: https://img.shields.io/badge/Typescript-294E80.svg?style=for-the-badge&logo=typescript
+
+[license-url]: LICENSE.md
+[license-image]: https://img.shields.io/github/license/adonisjs-community/create-adonis-ts-app?style=for-the-badge
+
+[synk-image]: https://img.shields.io/snyk/vulnerabilities/github/adonisjs-community/create-adonis-ts-app?label=Synk%20Vulnerabilities&style=for-the-badge
+[synk-url]: https://snyk.io/test/github/adonisjs-community/create-adonis-ts-app?targetFile=package.json "synk"
