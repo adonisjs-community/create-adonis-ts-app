@@ -14,50 +14,50 @@ import { TaskFn } from '../../src/contracts'
  * Setup eslint inside the project
  */
 const task: TaskFn = (_, logger, { absPath, prettier, eslint, pkg }) => {
-	if (!eslint) {
-		return
-	}
+  if (!eslint) {
+    return
+  }
 
-	/**
-	 * Create eslintRc file
-	 */
-	const eslintRc = new files.JsonFile(absPath, '.eslintrc.json')
+  /**
+   * Create eslintRc file
+   */
+  const eslintRc = new files.JsonFile(absPath, '.eslintrc.json')
 
-	/**
-	 * Setup config for prettier
-	 */
-	if (prettier) {
-		eslintRc.set('extends', [
-			'plugin:adonis/typescriptApp',
-			'prettier',
-			'prettier/@typescript-eslint',
-		])
-		eslintRc.set('plugins', ['prettier'])
-		eslintRc.set('rules', {
-			'prettier/prettier': ['error'],
-		})
-	} else {
-		// or setup without prettier
-		eslintRc.set('extends', ['plugin:adonis/typescriptApp'])
-	}
+  /**
+   * Setup config for prettier
+   */
+  if (prettier) {
+    eslintRc.set('extends', [
+      'plugin:adonis/typescriptApp',
+      'prettier',
+      'prettier/@typescript-eslint',
+    ])
+    eslintRc.set('plugins', ['prettier'])
+    eslintRc.set('rules', {
+      'prettier/prettier': ['error'],
+    })
+  } else {
+    // or setup without prettier
+    eslintRc.set('extends', ['plugin:adonis/typescriptApp'])
+  }
 
-	eslintRc.commit()
+  eslintRc.commit()
 
-	/**
-	 * Create eslintIgnore file
-	 */
-	const eslintIgnore = new files.NewLineFile(absPath, '.eslintignore')
-	eslintIgnore.add('build')
-	eslintIgnore.commit()
+  /**
+   * Create eslintIgnore file
+   */
+  const eslintIgnore = new files.NewLineFile(absPath, '.eslintignore')
+  eslintIgnore.add('build')
+  eslintIgnore.commit()
 
-	/**
-	 * Setup package.json file
-	 */
-	pkg.install('eslint')
-	pkg.install('eslint-plugin-adonis')
-	pkg.setScript('lint', 'eslint . --ext=.ts')
+  /**
+   * Setup package.json file
+   */
+  pkg.install('eslint')
+  pkg.install('eslint-plugin-adonis')
+  pkg.setScript('lint', 'eslint . --ext=.ts')
 
-	logger.action('create').succeeded('.eslintrc.json, .eslintignore')
+  logger.action('create').succeeded('.eslintrc.json, .eslintignore')
 }
 
 export default task

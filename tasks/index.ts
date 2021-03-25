@@ -18,29 +18,31 @@ import createTsConfig from './Scaffold/createTsConfig'
 import installDependencies from './InstallDependencies'
 import createGitIgnore from './Scaffold/createGitIgnore'
 import createEditorConfig from './Scaffold/createEditorConfig'
+import configureWebpackEncore from './Scaffold/configureWebpackEncore'
 
 /**
  * An array of tasks to be executed in chronological order
  */
 export const tasks = [
-	{
-		title: 'Scaffold project',
-		actions: [
-			copyTemplates,
-			createEditorConfig,
-			createGitIgnore,
-			createRcFile,
-			createTsConfig,
-			setupEslint,
-			setupPrettier,
-		],
-	},
-	{
-		title: 'Install dependencies',
-		actions: [installDependencies],
-	},
-	{
-		title: 'Configure installed packages',
-		actions: [configurePackages, generateManifest, formatSource],
-	},
+  {
+    title: 'Scaffold project',
+    actions: [
+      copyTemplates,
+      createEditorConfig,
+      createGitIgnore,
+      createRcFile,
+      createTsConfig,
+      setupEslint,
+      setupPrettier,
+      configureWebpackEncore,
+    ],
+  },
+  {
+    title: 'Install dependencies',
+    actions: [installDependencies],
+  },
+  {
+    title: 'Configure installed packages',
+    actions: [configurePackages, generateManifest, formatSource],
+  },
 ]

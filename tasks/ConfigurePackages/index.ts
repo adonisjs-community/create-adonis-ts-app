@@ -7,7 +7,6 @@
  * file that was distributed with this source code.
  */
 
-import execa from 'execa'
 import { tasks } from '@adonisjs/sink'
 import { TaskFn } from '../../src/contracts'
 import { packages } from '../../src/Schematics/packages'
@@ -17,47 +16,28 @@ import { packages } from '../../src/Schematics/packages'
  * on all of them in sequence
  */
 const task: TaskFn = async (application, logger, { boilerplate, absPath }) => {
-	let instructionsError: Error | null = null
+  let instructionsError: Error | null = null
 
-	/**
-	 * Executing instructions in sequence. Do not convert this block to
-	 * parallel execution, since two instructions touching the same
-	 * file may lead to race conditions.
-	 */
-	try {
-		for (let pkg of Object.keys(packages[boilerplate])) {
-			await new tasks.Instructions(pkg, absPath, application, false).useLogger(logger).execute()
-		}
-	} catch (error) {
-		instructionsError = error
-	}
+  /**
+   * Executing instructions in sequence. Do not convert this block to
+   * parallel execution, since two instructions touching the same
+   * file may lead to race conditions.
+   */
+  try {
+    for (let pkg of Object.keys(packages[boilerplate])) {
+      await new tasks.Instructions(pkg, absPath, application, false).useLogger(logger).execute()
+    }
+  } catch (error) {
+    instructionsError = error
+  }
 
-	/**
-	 * Handle error
-	 */
-	if (instructionsError) {
-		logger.fatal(instructionsError)
-		throw instructionsError
-	}
-
-	/**
-	 * Generate ace file in the newly created project
-	 */
-	const manifest = execa.node('ace', ['generate:manifest'], {
-		cwd: absPath,
-		env: {
-			FORCE_COLOR: 'true',
-		},
-	})
-	manifest.stdout!.pipe(process.stdout)
-
-	/**
-	 * Generating ace-manifest file is a secondary action and errors
-	 * can be ignored
-	 */
-	try {
-		await manifest
-	} catch {}
+  /**
+   * Handle error
+   */
+  if (instructionsError) {
+    logger.fatal(instructionsError)
+    throw instructionsError
+  }
 }
 
 export default task

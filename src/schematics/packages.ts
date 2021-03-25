@@ -10,30 +10,38 @@
 import { CliState } from '../contracts'
 
 export const packages: {
-	[K in CliState['boilerplate']]: {
-		[pkg: string]: { version: string }
-	}
+  [K in CliState['boilerplate']]: {
+    [pkg: string]: { version: string }
+  }
 } = {
-	web: {
-		'@adonisjs/core': {
-			version: '^5.0.4-preview-rc',
-		},
-		'@adonisjs/repl': {
-			version: '^1.0.0',
-		},
-		'@adonisjs/session': {
-			version: '^4.0.0',
-		},
-		'@adonisjs/view': {
-			version: '^3.0.0',
-		},
-	},
-	api: {
-		'@adonisjs/core': {
-			version: '^5.0.4-preview-rc',
-		},
-		'@adonisjs/repl': {
-			version: '^1.0.0',
-		},
-	},
+  web: {
+    '@adonisjs/core': {
+      version: '^5.1.0',
+    },
+    '@adonisjs/repl': {
+      version: '^3.0.0',
+    },
+    '@adonisjs/session': {
+      version: '^6.0.0',
+    },
+    '@adonisjs/view': {
+      version: '^5.0.0',
+    },
+    '@adonisjs/shield': {
+      version: '^6.0.0',
+    },
+  },
+  api: {
+    '@adonisjs/core': {
+      version: '^5.1.0',
+    },
+    '@adonisjs/repl': {
+      version: '^3.0.0',
+    },
+  },
+  slim: {
+    '@adonisjs/core': {
+      version: '^5.1.0',
+    },
+  },
 }

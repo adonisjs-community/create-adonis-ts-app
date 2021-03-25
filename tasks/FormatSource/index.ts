@@ -14,19 +14,19 @@ import { TaskFn } from '../../src/contracts'
  * Format source files using prettier
  */
 const task: TaskFn = async (_, __, { absPath, prettier }) => {
-	if (!prettier) {
-		return
-	}
+  if (!prettier) {
+    return
+  }
 
-	/**
-	 * Formatting source files is a secondary action and errors can be
-	 * ignored
-	 */
-	try {
-		await execa('npm', ['run', 'format'], {
-			cwd: absPath,
-		})
-	} catch {}
+  /**
+   * Formatting source files is a secondary action and errors can be
+   * ignored
+   */
+  try {
+    await execa('npm', ['run', 'format'], {
+      cwd: absPath,
+    })
+  } catch {}
 }
 
 export default task

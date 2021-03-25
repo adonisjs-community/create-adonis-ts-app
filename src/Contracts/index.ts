@@ -14,21 +14,22 @@ import { ApplicationContract } from '@ioc:Adonis/Core/Application'
  * Shape of task functions
  */
 export type TaskFn = (
-	application: ApplicationContract,
-	logger: typeof sinkLogger,
-	state: CliState
+  application: ApplicationContract,
+  logger: typeof sinkLogger,
+  state: CliState
 ) => void | Promise<void>
 
 /**
  * CLI state
  */
 export type CliState = {
-	baseName: string
-	absPath: string
-	client: 'yarn' | 'npm'
-	boilerplate: 'web' | 'api'
-	projectName: string
-	eslint: boolean
-	prettier: boolean
-	pkg: files.PackageJsonFile
+  baseName: string
+  absPath: string
+  client: 'yarn' | 'npm'
+  boilerplate: 'web' | 'api' | 'slim'
+  projectName: string
+  eslint: boolean
+  prettier: boolean
+  encore: boolean
+  pkg: files.PackageJsonFile
 }
