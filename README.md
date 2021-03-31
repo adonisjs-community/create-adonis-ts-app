@@ -20,7 +20,7 @@ This is the official starter template to create AdonisJS applications. You can c
 
 - **api**: Project structure + dependencies tailored for creating a REST API server.
 - **web**: Traditional web application with server rendered templates and pre-configured support for sessions.
-- **slim**: A smallest possible AdonisJS application. Still way powerful and feature rich then an Express application.
+- **slim**: A smallest possible AdonisJS application. Still way powerful and feature rich than an Express application.
 
 ## Creating a new app
 
