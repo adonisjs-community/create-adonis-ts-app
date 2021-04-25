@@ -15,7 +15,7 @@ import { packages } from '../../src/Schematics/packages'
  * Creates the `package.json` file in the project root and installs
  * required dependencies
  */
-const task: TaskFn = async (_, logger, { pkg, client, boilerplate }) => {
+const task: TaskFn = async (_, logger, { pkg, client, boilerplate, debug }) => {
   /**
    * Set by `yarn create`
    */
@@ -53,23 +53,29 @@ const task: TaskFn = async (_, logger, { pkg, client, boilerplate }) => {
    * a while
    */
   let spinner: ReturnType<typeof logger.await> | undefined
-  pkg.beforeInstall((list, dev) => {
-    /**
-     * The callback is invoked twice. First for dev dependencies
-     * and then for prod depdencies and hence we should stop
-     * the old spinner before starting a new one
-     */
-    if (spinner) {
-      spinner.stop()
-    }
 
-    spinner = logger.await(getInstallMessage(list), undefined, dev ? 'dev' : 'prod')
-  })
+  /**
+   * Start spinner when not in debug mode
+   */
+  if (!debug) {
+    pkg.beforeInstall((list, dev) => {
+      /**
+       * The callback is invoked twice. First for dev dependencies
+       * and then for prod depdencies and hence we should stop
+       * the old spinner before starting a new one
+       */
+      if (spinner) {
+        spinner.stop()
+      }
+
+      spinner = logger.await(getInstallMessage(list), undefined, dev ? 'dev' : 'prod')
+    })
+  }
 
   /**
    * Commit mutations
    */
-  const response = await pkg.commitAsync()
+  const response = debug ? pkg.commit() : await pkg.commitAsync()
   spinner && spinner.stop()
 
   if (response && response.status === 1) {

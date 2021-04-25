@@ -13,7 +13,7 @@ import { TaskFn } from '../../src/contracts'
 /**
  * Format source files using prettier
  */
-const task: TaskFn = async (_, __, { absPath, prettier }) => {
+const task: TaskFn = async (_, __, { absPath, prettier, debug }) => {
   if (!prettier) {
     return
   }
@@ -25,6 +25,7 @@ const task: TaskFn = async (_, __, { absPath, prettier }) => {
   try {
     await execa('npm', ['run', 'format'], {
       cwd: absPath,
+      ...(debug ? { stdio: 'inherit' } : {}),
     })
   } catch {}
 }

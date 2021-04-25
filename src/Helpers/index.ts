@@ -25,6 +25,7 @@ const WIDTH = cliWidth()
 export async function getState(
   projectRoot: string,
   options: {
+    debug?: boolean
     boilerplate?: 'web' | 'api' | 'slim'
     projectName?: string
     eslint?: boolean
@@ -102,7 +103,9 @@ export async function getState(
   }
 
   /**
-   * Prompt for Webpack encore
+   * Prompt for Webpack encore. We only do it during the web
+   * boilerplate. For others, a user can define it using
+   * the flag
    */
   if (options.encore === null && options.boilerplate === 'web') {
     try {
@@ -119,7 +122,7 @@ export async function getState(
    */
   ensureDirSync(absPath)
 
-  const pkg = new files.PackageJsonFile(absPath)
+  const pkg = new files.PackageJsonFile(absPath, options.debug ? 'inherit' : undefined)
   pkg.set('name', options.projectName)
   pkg.set('version', '1.0.0')
   pkg.set('private', true)
@@ -148,6 +151,7 @@ export async function getState(
     prettier: options.prettier!,
     client: options.client,
     encore: options.encore!,
+    debug: !!options.debug,
   }
 }
 

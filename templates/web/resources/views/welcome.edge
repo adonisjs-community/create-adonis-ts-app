@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdonisJS - A Modern Web Framework For Node.js</title>
+  <title>AdonisJS - A fully featured web framework for Node.js</title>
+  {{#encore}}
+  @entryPointStyles('app')
+  @entryPointScripts('app')
+  {{/encore}}
+  {{^encore}}
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap" rel="stylesheet">
   <style>
     html, body {
@@ -81,6 +86,7 @@
       background: #e6e2ff;
     }
   </style>
+  {{/encore}}
 </head>
 <body>
 

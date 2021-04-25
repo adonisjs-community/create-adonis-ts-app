@@ -25,7 +25,7 @@ export const packages: {
       version: '^6.0.0',
     },
     '@adonisjs/view': {
-      version: '^5.0.0',
+      version: '^6.0.0',
     },
     '@adonisjs/shield': {
       version: '^6.0.0',

@@ -16,22 +16,22 @@ import { TaskFn } from '../../src/contracts'
 /**
  * Copy boilerplate files to the destination
  */
-const task: TaskFn = (_, logger, { boilerplate, absPath }) => {
-  const baseDir = join(__dirname, '..', '..', 'templates', boilerplate)
+const task: TaskFn = (_, logger, state) => {
+  const baseDir = join(__dirname, '..', '..', 'templates', state.boilerplate)
   const templateFiles = fsReadAll(baseDir, () => true)
 
   templateFiles.forEach((name: string) => {
     if (name.endsWith('.ico')) {
-      utils.copyFiles(baseDir, absPath, [name]).forEach(({ filePath, state }) => {
+      utils.copyFiles(baseDir, state.absPath, [name]).forEach((file) => {
         const action = logger.action('create')
-        state === 'copied' ? action.succeeded(filePath) : action.skipped(filePath)
+        file.state === 'copied' ? action.succeeded(file.filePath) : action.skipped(file.filePath)
       })
       return
     }
 
     const outputFileName = name.replace(/\.txt$/, '.ts')
     const src = join(baseDir, name)
-    new files.MustacheFile(absPath, outputFileName, src).apply({}).commit()
+    new files.MustacheFile(state.absPath, outputFileName, src).apply(state).commit()
     logger.action('create').succeeded(outputFileName)
   })
 }

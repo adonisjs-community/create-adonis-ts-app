@@ -13,7 +13,7 @@ import { TaskFn } from '../../src/contracts'
 /**
  * Generate manifest file by running `node ace generate:manifest` file
  */
-const task: TaskFn = async (_, __, { absPath }) => {
+const task: TaskFn = async (_, __, { absPath, debug }) => {
   /**
    * Generating ace-manifest file is a secondary action and errors
    * can be ignored
@@ -21,6 +21,7 @@ const task: TaskFn = async (_, __, { absPath }) => {
   try {
     await execa('node', ['ace', 'generate:manifest'], {
       cwd: absPath,
+      ...(debug ? { stdio: 'inherit' } : {}),
     })
   } catch {}
 }

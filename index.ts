@@ -60,6 +60,7 @@ export async function runTasks(args: string[]) {
   const state = await getState(projectPath, {
     client: usingYarn ? 'yarn' : 'npm',
     projectName: argv.name,
+    debug: argv.debug,
     boilerplate: argv.boilerplate,
     eslint: argv.eslint,
     prettier: argv.prettier,
@@ -90,12 +91,12 @@ export async function runTasks(args: string[]) {
   /**
    * Decide the ui renderer to use
    */
-  const tasksManager = argv.debug ? tasksUi.verbose() : tasksUi()
+  const tasksManager = state.debug ? tasksUi.verbose() : tasksUi()
 
   /**
    * Execute all tasks
    */
-  tasks.forEach(({ title, actions }) => {
+  tasks(state).forEach(({ title, actions }) => {
     tasksManager.add(title, async (taskLogger, task) => {
       for (let action of actions) {
         await action(application, taskLogger, state)

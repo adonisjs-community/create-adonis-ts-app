@@ -25,6 +25,7 @@ export type TaskFn = (
 export type CliState = {
   baseName: string
   absPath: string
+  debug: boolean
   client: 'yarn' | 'npm'
   boilerplate: 'web' | 'api' | 'slim'
   projectName: string
