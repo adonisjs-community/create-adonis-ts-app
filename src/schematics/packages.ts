@@ -28,7 +28,7 @@ export const packages: {
       version: '^6.0.0',
     },
     '@adonisjs/shield': {
-      version: '^6.0.0',
+      version: '^7.0.0',
     },
   },
   api: {
