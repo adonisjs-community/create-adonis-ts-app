@@ -22,7 +22,7 @@ function createCssEntryPoint(absPath: string, logger: typeof SinkLogger) {
   const cssFile = new files.MustacheFile(absPath, outFile, template).apply({})
   cssFile.overwrite = true
   cssFile.commit()
-  logger.action('create').succeeded(template)
+  logger.action('create').succeeded(outFile)
 }
 
 /**
@@ -35,7 +35,7 @@ function createJsEntryPoint(absPath: string, logger: typeof SinkLogger) {
   const jsFile = new files.MustacheFile(absPath, outFile, template).apply({})
   jsFile.overwrite = true
   jsFile.commit()
-  logger.action('create').succeeded(template)
+  logger.action('create').succeeded(outFile)
 }
 
 /**
