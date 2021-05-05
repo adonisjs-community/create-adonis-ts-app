@@ -27,11 +27,7 @@ const task: TaskFn = (_, logger, { absPath, prettier, eslint, pkg }) => {
    * Setup config for prettier
    */
   if (prettier) {
-    eslintRc.set('extends', [
-      'plugin:adonis/typescriptApp',
-      'prettier',
-      'prettier/@typescript-eslint',
-    ])
+    eslintRc.set('extends', ['plugin:adonis/typescriptApp', 'prettier'])
     eslintRc.set('plugins', ['prettier'])
     eslintRc.set('rules', {
       'prettier/prettier': ['error'],
