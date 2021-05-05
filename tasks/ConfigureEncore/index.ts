@@ -16,7 +16,7 @@ import { TaskFn } from '../../src/contracts'
  * Creates the CSS entrypoint
  */
 function createCssEntryPoint(absPath: string, logger: typeof SinkLogger) {
-  const template = join(__dirname, '..', '..', '..', 'templates/stubs/css/app.css')
+  const template = join(__dirname, '..', '..', 'templates/stubs/css/app.css')
   const outFile = 'resources/css/app.css'
 
   const cssFile = new files.MustacheFile(absPath, outFile, template).apply({})
@@ -29,7 +29,7 @@ function createCssEntryPoint(absPath: string, logger: typeof SinkLogger) {
  * Creates the JS entrypoint
  */
 function createJsEntryPoint(absPath: string, logger: typeof SinkLogger) {
-  const template = join(__dirname, '..', '..', '..', 'templates/stubs/js/app.js')
+  const template = join(__dirname, '..', '..', 'templates/stubs/js/app.js')
   const outFile = 'resources/js/app.js'
 
   const jsFile = new files.MustacheFile(absPath, outFile, template).apply({})
