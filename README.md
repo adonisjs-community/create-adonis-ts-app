@@ -67,7 +67,7 @@ Options
 Choose the boilerplate by passing the flag
 
 ```sh
-npm init adonis-ts-app hello-world --boilerplate=web
+npm init adonis-ts-app hello-world -- --boilerplate=web
 ```
 
 #### name
@@ -75,7 +75,7 @@ npm init adonis-ts-app hello-world --boilerplate=web
 Define the application name. The `name` property inside the `package.json` file will reflect this value
 
 ```sh
-npm init adonis-ts-app hello-world --boilerplate=my-app
+npm init adonis-ts-app hello-world -- --boilerplate=my-app
 ```
 
 #### eslint
@@ -83,7 +83,7 @@ npm init adonis-ts-app hello-world --boilerplate=my-app
 Configure eslint
 
 ```sh
-npm init adonis-ts-app hello-world --eslint
+npm init adonis-ts-app hello-world -- --eslint
 ```
 
 #### prettier
@@ -91,7 +91,7 @@ npm init adonis-ts-app hello-world --eslint
 Configure prettier
 
 ```sh
-npm init adonis-ts-app hello-world --prettier
+npm init adonis-ts-app hello-world -- --prettier
 ```
 
 #### encore
@@ -99,7 +99,7 @@ npm init adonis-ts-app hello-world --prettier
 Configure encore
 
 ```sh
-npm init adonis-ts-app hello-world --encore
+npm init adonis-ts-app hello-world -- --encore
 ```
 
 #### debug
@@ -107,7 +107,7 @@ npm init adonis-ts-app hello-world --encore
 Debug the project creation process. This flag will use the verbose output for better debugging experience.
 
 ```sh
-npm init adonis-ts-app hello-world --debug
+npm init adonis-ts-app hello-world -- --debug
 ```
 
 <div align="center">
