@@ -49,7 +49,7 @@ const task: TaskFn = (_, logger, { absPath, prettier, eslint, pkg }) => {
   /**
    * Setup package.json file
    */
-  pkg.install('eslint@7.32.0')
+  pkg.install('eslint')
   pkg.install('eslint-plugin-adonis')
   pkg.setScript('lint', 'eslint . --ext=.ts')
 
