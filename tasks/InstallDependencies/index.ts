@@ -41,12 +41,12 @@ const task: TaskFn = async (_, logger, { pkg, client, boilerplate, debug }) => {
   /**
    * Required dev dependencies
    */
-  pkg.install('typescript', '~4.2')
+  pkg.install('typescript', '~4.5')
   pkg.install('youch')
   pkg.install('youch-terminal')
   pkg.install('pino-pretty')
   pkg.install('adonis-preset-ts')
-  pkg.install('@adonisjs/assembler', '^5.0.0')
+  pkg.install('@adonisjs/assembler', '^5.3.0')
 
   /**
    * Displaying a spinner, since install packages takes

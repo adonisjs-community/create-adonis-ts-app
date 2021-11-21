@@ -16,16 +16,16 @@ export const packages: {
 } = {
   web: {
     '@adonisjs/core': {
-      version: '^5.3.0',
+      version: '^5.4.0',
     },
     '@adonisjs/repl': {
       version: '^3.1.0',
     },
     '@adonisjs/session': {
-      version: '^6.0.0',
+      version: '^6.1.0',
     },
     '@adonisjs/view': {
-      version: '^6.0.0',
+      version: '^6.1.0',
     },
     '@adonisjs/shield': {
       version: '^7.0.0',
@@ -33,7 +33,7 @@ export const packages: {
   },
   api: {
     '@adonisjs/core': {
-      version: '^5.3.0',
+      version: '^5.4.0',
     },
     '@adonisjs/repl': {
       version: '^3.1.0',
@@ -41,7 +41,7 @@ export const packages: {
   },
   slim: {
     '@adonisjs/core': {
-      version: '^5.3.0',
+      version: '^5.4.0',
     },
   },
 }
