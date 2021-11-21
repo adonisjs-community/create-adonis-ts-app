@@ -17,10 +17,10 @@ import { packages } from '../../src/Schematics/packages'
  */
 const task: TaskFn = async (_, logger, { pkg, client, boilerplate, debug }) => {
   /**
-   * Set by `yarn create`
+   * Set the wanted client
    */
-  if (client === 'yarn') {
-    pkg.yarn(true)
+  if (client !== 'npm') {
+    pkg.useClient(client)
   }
 
   /**
@@ -79,7 +79,12 @@ const task: TaskFn = async (_, logger, { pkg, client, boilerplate, debug }) => {
   spinner && spinner.stop()
 
   if (response && response.status === 1) {
-    const errorMessage = client === 'yarn' ? 'yarn install failed' : 'npm install failed'
+    const errorMessage =
+      client === 'yarn'
+        ? 'yarn install failed'
+        : client === 'pnpm'
+        ? 'pnpm install failed'
+        : 'npm install failed'
     const error = new Error(errorMessage)
     error['stack'] = response.stderr.toString()
     throw error

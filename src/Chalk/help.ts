@@ -8,31 +8,39 @@
  */
 
 import { logger } from '@adonisjs/sink'
+import type { SupportedPackageManager } from '../Helpers'
 
 /**
  * Text to show on the help screen. Its simple and hence writing it
  * by hand is fine
  */
-export const getHelp = (yarn: boolean) => `${logger.colors.green(
-  yarn ? 'yarn create adonis-ts-app' : 'npm init adonis-ts-app'
-)} ${logger.colors.dim('<project-name>')}
+export const getHelp = (packageManager: SupportedPackageManager) => {
+  const runSentence =
+    packageManager === 'yarn'
+      ? 'yarn create adonis-ts-app'
+      : packageManager === 'pnpm'
+      ? 'pnpm init adonis-ts-app'
+      : 'npm init adonis-ts-app'
+
+  return `${logger.colors.green(runSentence)} ${logger.colors.dim('<project-name>')}
 
 ${logger.colors.yellow().bold('Options')}
 ${logger.colors.green('--boilerplate')} ${logger.colors.dim(
-  '[api, web, slim]'
-)}    ${logger.colors.dim('Select the project boilerplate')}
+    '[api, web, slim]'
+  )}    ${logger.colors.dim('Select the project boilerplate')}
 ${logger.colors.green('--name')} ${logger.colors.dim(
-  '<string>'
-)}                   ${logger.colors.dim('Specify application name')}
+    '<string>'
+  )}                   ${logger.colors.dim('Specify application name')}
 ${logger.colors.green('--eslint')} ${logger.colors.dim(
-  '<boolean>'
-)}                ${logger.colors.dim('Enable/disable eslint setup')}
+    '<boolean>'
+  )}                ${logger.colors.dim('Enable/disable eslint setup')}
 ${logger.colors.green('--prettier')} ${logger.colors.dim(
-  '<boolean>'
-)}              ${logger.colors.dim('Enable/disable prettier setup')}
+    '<boolean>'
+  )}              ${logger.colors.dim('Enable/disable prettier setup')}
 ${logger.colors.green('--encore')} ${logger.colors.dim(
-  '<boolean>'
-)}                ${logger.colors.dim('Enable/disable encore setup')}
+    '<boolean>'
+  )}                ${logger.colors.dim('Enable/disable encore setup')}
 ${logger.colors.green('--debug')} ${logger.colors.dim(
-  '<boolean>'
-)}                 ${logger.colors.dim('Turn on the debug mode')}`
+    '<boolean>'
+  )}                 ${logger.colors.dim('Turn on the debug mode')}`
+}

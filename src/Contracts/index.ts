@@ -9,6 +9,7 @@
 
 import { logger as sinkLogger, files } from '@adonisjs/sink'
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
+import type { SupportedPackageManager } from '../Helpers'
 
 /**
  * Shape of task functions
@@ -26,7 +27,7 @@ export type CliState = {
   baseName: string
   absPath: string
   debug: boolean
-  client: 'yarn' | 'npm'
+  client: SupportedPackageManager
   boilerplate: 'web' | 'api' | 'slim'
   projectName: string
   eslint: boolean
