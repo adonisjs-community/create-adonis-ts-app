@@ -75,7 +75,7 @@ npm init adonis-ts-app hello-world -- --boilerplate=web
 Define the application name. The `name` property inside the `package.json` file will reflect this value
 
 ```sh
-npm init adonis-ts-app hello-world -- --boilerplate=my-app
+npm init adonis-ts-app hello-world -- --name=my-app
 ```
 
 #### eslint
