@@ -33,5 +33,6 @@ export type CliState = {
   eslint: boolean
   prettier: boolean
   encore: boolean
+  skipInstall: boolean
   pkg: files.PackageJsonFile
 }

@@ -30,6 +30,7 @@ export async function getState(
     projectName?: string
     eslint?: boolean
     prettier?: boolean
+    skipInstall?: boolean
     client: SupportedPackageManager
     encore?: boolean
   }
@@ -92,7 +93,7 @@ export async function getState(
   }
 
   /**
-   * Prompt for Prettier. Only when accepted to use prettier
+   * Prompt for Prettier. Only when accepted to use Eslint
    */
   if (options.prettier === null && options.eslint) {
     try {
@@ -112,6 +113,17 @@ export async function getState(
       options.encore = await getPrompt().confirm(
         'Configure webpack encore for compiling frontend assets?'
       )
+    } catch (_) {
+      process.exit(1)
+    }
+  }
+
+  /**
+   * Prompt for skipping dependencies installation
+   */
+  if (options.skipInstall === null) {
+    try {
+      options.skipInstall = !(await getPrompt().confirm('Install dependencies?'))
     } catch (_) {
       process.exit(1)
     }
@@ -151,6 +163,7 @@ export async function getState(
     prettier: options.prettier!,
     client: options.client,
     encore: options.encore!,
+    skipInstall: options.skipInstall!,
     debug: !!options.debug,
   }
 }

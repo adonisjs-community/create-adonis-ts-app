@@ -9,18 +9,27 @@
 
 import { instructions, logger } from '@adonisjs/sink'
 import { CliState } from '../contracts'
+import { packageManager } from '../Helpers'
 
 /**
  * Greet post creation
  */
-export const greet = ({ baseName }: CliState) => {
+export const greet = ({ baseName, skipInstall }: CliState) => {
   console.log('')
 
-  instructions()
+  const instructionList = instructions()
     .heading(logger.colors.dim('Run following commands to get started'))
     .add(logger.colors.cyan(`cd ${baseName}`))
-    .add(logger.colors.cyan('node ace serve --watch'))
-    .render()
+
+  /**
+   * Display instructions for installing and configuring
+   * dependencies only when `skipInstall` is true
+   */
+  if (skipInstall) {
+    instructionList.add(logger.colors.cyan(`${packageManager} install`))
+  }
+
+  instructionList.add(logger.colors.cyan('node ace serve --watch')).render()
 
   console.log('')
 }

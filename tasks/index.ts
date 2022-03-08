@@ -24,7 +24,7 @@ import { CliState } from '../src/Contracts'
 /**
  * An array of tasks to be executed in chronological order
  */
-export const tasks = function ({ encore }: CliState) {
+export const tasks = function ({ encore, skipInstall }: CliState) {
   return [
     {
       title: 'Scaffold project',
@@ -38,13 +38,21 @@ export const tasks = function ({ encore }: CliState) {
         setupPrettier,
       ],
     },
+    ...(skipInstall
+      ? []
+      : [
+          {
+            title: 'Install dependencies',
+            actions: [installDependencies],
+          },
+          {
+            title: 'Configure installed packages',
+            actions: [configurePackages, generateManifest],
+          },
+        ]),
     {
-      title: 'Install dependencies',
-      actions: [installDependencies],
-    },
-    {
-      title: 'Configure installed packages',
-      actions: [configurePackages, generateManifest, formatSource],
+      title: 'Format source',
+      actions: [formatSource],
     },
     ...(encore
       ? [

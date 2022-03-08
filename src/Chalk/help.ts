@@ -42,5 +42,8 @@ ${logger.colors.green('--encore')} ${logger.colors.dim(
   )}                ${logger.colors.dim('Enable/disable encore setup')}
 ${logger.colors.green('--debug')} ${logger.colors.dim(
     '<boolean>'
-  )}                 ${logger.colors.dim('Turn on the debug mode')}`
+  )}                 ${logger.colors.dim('Turn on the debug mode')}
+${logger.colors.green('--skip-install')} ${logger.colors.dim(
+    '<boolean>'
+  )}          ${logger.colors.dim('Skip dependencies installation')}`
 }

@@ -29,12 +29,16 @@ export async function runTasks(args: string[]) {
    */
   const argv = getops(args, {
     string: ['boilerplate', 'name'],
-    boolean: ['eslint', 'debug', 'prettier', 'encore'],
+    boolean: ['eslint', 'debug', 'prettier', 'encore', 'skipInstall'],
     default: {
       eslint: null,
       debug: false,
       prettier: null,
       encore: null,
+      skipInstall: null,
+    },
+    alias: {
+      'skip-install': 'skipInstall',
     },
   })
 
@@ -65,6 +69,7 @@ export async function runTasks(args: string[]) {
     eslint: argv.eslint,
     prettier: argv.prettier,
     encore: argv.encore,
+    skipInstall: argv.skipInstall,
   })
 
   /**
