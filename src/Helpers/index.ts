@@ -123,7 +123,9 @@ export async function getState(
    */
   if (options.skipInstall === null) {
     try {
-      options.skipInstall = !(await getPrompt().confirm('Install dependencies?'))
+      options.skipInstall = !(await getPrompt().confirm('Install dependencies?', {
+        default: true,
+      }))
     } catch (_) {
       process.exit(1)
     }
