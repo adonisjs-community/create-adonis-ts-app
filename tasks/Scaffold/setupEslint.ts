@@ -7,53 +7,38 @@
  * file that was distributed with this source code.
  */
 
-import { files } from '@adonisjs/sink'
 import { TaskFn } from '../../src/contracts'
 
 /**
  * Setup eslint inside the project
  */
-const task: TaskFn = (_, logger, { absPath, prettier, eslint, pkg }) => {
+const task: TaskFn = (_, __, { prettier, eslint, pkg }) => {
   if (!eslint) {
     return
   }
 
   /**
-   * Create eslintRc file
-   */
-  const eslintRc = new files.JsonFile(absPath, '.eslintrc.json')
-
-  /**
    * Setup config for prettier
    */
   if (prettier) {
-    eslintRc.set('extends', ['plugin:adonis/typescriptApp', 'prettier'])
-    eslintRc.set('plugins', ['prettier'])
-    eslintRc.set('rules', {
+    pkg.set('eslintConfig.extends', ['plugin:adonis/typescriptApp', 'prettier'])
+    pkg.set('eslintConfig.plugins', ['prettier'])
+    pkg.set('eslintConfig.rules', {
       'prettier/prettier': ['error'],
     })
+    pkg.set('eslintIgnore', ['build'])
   } else {
     // or setup without prettier
-    eslintRc.set('extends', ['plugin:adonis/typescriptApp'])
+    pkg.set('eslintConfig.extends', ['plugin:adonis/typescriptApp'])
+    pkg.set('eslintIgnore', ['build'])
   }
 
-  eslintRc.commit()
-
   /**
-   * Create eslintIgnore file
-   */
-  const eslintIgnore = new files.NewLineFile(absPath, '.eslintignore')
-  eslintIgnore.add('build')
-  eslintIgnore.commit()
-
-  /**
-   * Setup package.json file
+   * Install packages and configure lint script
    */
   pkg.install('eslint')
   pkg.install('eslint-plugin-adonis')
   pkg.setScript('lint', 'eslint . --ext=.ts')
-
-  logger.action('create').succeeded('.eslintrc.json, .eslintignore')
 }
 
 export default task

@@ -21,16 +21,15 @@ const task: TaskFn = (_, logger, { absPath, prettier, eslint, pkg }) => {
   /**
    * Create prettierrc file
    */
-  const prettierRc = new files.JsonFile(absPath, '.prettierrc')
-  prettierRc.set('trailingComma', 'es5')
-  prettierRc.set('semi', false)
-  prettierRc.set('singleQuote', true)
-  prettierRc.set('useTabs', false)
-  prettierRc.set('quoteProps', 'consistent')
-  prettierRc.set('bracketSpacing', true)
-  prettierRc.set('arrowParens', 'always')
-  prettierRc.set('printWidth', 100)
-  prettierRc.commit()
+  pkg.set('prettier.trailingComma', 'es5')
+  pkg.set('prettier.semi', false)
+  pkg.set('prettier.singleQuote', true)
+  pkg.set('prettier.useTabs', false)
+  pkg.set('prettier.quoteProps', 'consistent')
+  pkg.set('prettier.bracketSpacing', true)
+  pkg.set('prettier.arrowParens', 'always')
+  pkg.set('prettier.printWidth', 100)
+  pkg.commit()
 
   /**
    * Create prettier ignore file
@@ -38,16 +37,16 @@ const task: TaskFn = (_, logger, { absPath, prettier, eslint, pkg }) => {
   const prettierIgnore = new files.NewLineFile(absPath, '.prettierignore')
   prettierIgnore.add('build')
   prettierIgnore.commit()
+  logger.action('create').succeeded('.prettierignore')
 
   /**
-   * Setup package.json file
+   * Install prettier dependencies and register formatting
+   * script
    */
   pkg.install('prettier')
   pkg.install('eslint-config-prettier')
   pkg.install('eslint-plugin-prettier')
   pkg.setScript('format', 'prettier --write .')
-
-  logger.action('create').succeeded('.prettierrc, .prettierignore')
 }
 
 export default task

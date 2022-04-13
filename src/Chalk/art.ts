@@ -7,8 +7,11 @@
  * file that was distributed with this source code.
  */
 
-/* eslint-disable-next-line */
-const art =
-  "    _       _             _         _     \n   / \\   __| | ___  _ __ (_)___    | |___ \n  / _ \\ / _` |/ _ \\| '_ \\| / __|_  | / __|\n / ___ \\ (_| | (_) | | | | \\__ \\ |_| \\__ \\\n/_/   \\_\\__,_|\\___/|_| |_|_|___/\\___/|___/\n"
+import gradient from 'gradient-string'
 
-export const showArt = () => console.log(art)
+const art = Buffer.from(
+  'CiAgICAgXyAgICAgICBfICAgICAgICAgICAgIF8gICAgICAgICBfIF9fX18gIAogICAgLyBcICAgX198IHwgX19fICBfIF9fIChfKV9fXyAgICB8IC8gX19ffCAKICAgLyBfIFwgLyBfYCB8LyBfIFx8ICdfIFx8IC8gX198XyAgfCBcX19fIFwgCiAgLyBfX18gXCAoX3wgfCAoXykgfCB8IHwgfCBcX18gXCB8X3wgfF9fXykgfAogL18vICAgXF9cX18sX3xcX19fL3xffCB8X3xffF9fXy9cX19fL3xfX19fLyAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCg==',
+  'base64'
+).toString()
+
+export const showArt = () => console.log(gradient.pastel.multiline(art))

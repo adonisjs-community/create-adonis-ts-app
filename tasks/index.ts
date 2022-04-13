@@ -8,6 +8,7 @@
  */
 
 import formatSource from './FormatSource'
+import configureTests from './ConfigureTests'
 import setupEslint from './Scaffold/setupEslint'
 import generateManifest from './GenerateManifest'
 import createRcFile from './Scaffold/createRcFile'
@@ -44,7 +45,7 @@ export const tasks = function ({ encore }: CliState) {
     },
     {
       title: 'Configure installed packages',
-      actions: [configurePackages, generateManifest, formatSource],
+      actions: [configurePackages, configureTests, generateManifest, formatSource],
     },
     ...(encore
       ? [
