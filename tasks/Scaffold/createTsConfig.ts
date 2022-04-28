@@ -19,11 +19,6 @@ const task: TaskFn = (_, logger, { absPath }) => {
   /**
    * Use a base config file
    */
-
-  /**
-   * Analyze the project and see if a node_modules exists in the top folder,
-   * which case it might mean we're on a monorepo.
-   */
   tsconfig.set('extends', 'adonis-preset-ts/tsconfig.json')
 
   /**
