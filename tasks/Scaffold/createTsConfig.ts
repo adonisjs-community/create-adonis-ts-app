@@ -19,7 +19,7 @@ const task: TaskFn = (_, logger, { absPath }) => {
   /**
    * Use a base config file
    */
-  tsconfig.set('extends', './node_modules/adonis-preset-ts/tsconfig')
+  tsconfig.set('extends', 'adonis-preset-ts/tsconfig.json')
 
   /**
    * Include everything
