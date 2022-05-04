@@ -25,7 +25,7 @@ import { CliState } from '../src/Contracts'
 /**
  * An array of tasks to be executed in chronological order
  */
-export const tasks = function ({ encore }: CliState) {
+export const tasks = function ({ encore, test }: CliState) {
   return [
     {
       title: 'Scaffold project',
@@ -45,8 +45,16 @@ export const tasks = function ({ encore }: CliState) {
     },
     {
       title: 'Configure installed packages',
-      actions: [configurePackages, configureTests, generateManifest, formatSource],
+      actions: [configurePackages, generateManifest, formatSource],
     },
+    ...(test
+      ? [
+          {
+            title: 'Configure tests',
+            actions: [configureTests],
+          },
+        ]
+      : []),
     ...(encore
       ? [
           {

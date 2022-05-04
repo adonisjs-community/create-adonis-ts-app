@@ -32,6 +32,7 @@ export async function getState(
     prettier?: boolean
     client: SupportedPackageManager
     encore?: boolean
+    test?: boolean
   }
 ): Promise<CliState> {
   /**
@@ -103,6 +104,17 @@ export async function getState(
   }
 
   /**
+   * Prompt for installing Japa and its preset for AdonisJS.
+   */
+  try {
+    options.test = await getPrompt().confirm(
+      'Setup Japa ( testing framework ) and its preset for AdonisJS?'
+    )
+  } catch (_) {
+    process.exit(1)
+  }
+
+  /**
    * Prompt for Webpack encore. We only do it during the web
    * boilerplate. For others, a user can define it using
    * the flag
@@ -152,6 +164,7 @@ export async function getState(
     client: options.client,
     encore: options.encore!,
     debug: !!options.debug,
+    test: options.test!,
   }
 }
 
