@@ -108,7 +108,10 @@ export async function getState(
    */
   try {
     options.test = await getPrompt().confirm(
-      'Setup Japa ( testing framework ) and its preset for AdonisJS?'
+      'Setup Japa ( testing framework ) and its preset for AdonisJS?',
+      {
+        default: true,
+      }
     )
   } catch (_) {
     process.exit(1)
