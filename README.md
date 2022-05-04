@@ -59,6 +59,7 @@ Options
 --eslint <boolean>                Enable/disable eslint setup
 --prettier <boolean>              Enable/disable prettier setup
 --encore <boolean>                Enable/disable encore setup
+--test <boolean>                  Enable/disable japa setup
 --debug <boolean>                 Turn on the debug mode
 ```
 
@@ -100,6 +101,14 @@ Configure encore
 
 ```sh
 npm init adonis-ts-app hello-world -- --encore
+```
+
+#### test
+
+Configure [Japa](https://japa.dev/) ( our testing framework ) and its preset for AdonisJS
+
+```sh
+npm init adonis-ts-app hello-world -- --test
 ```
 
 #### debug
