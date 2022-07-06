@@ -11,7 +11,7 @@ import cliWidth from 'cli-width'
 import { isAbsolute, join, basename } from 'path'
 import { files, getPrompt } from '@adonisjs/sink'
 
-import { CliState } from '../contracts'
+import { CliState } from '../Contracts'
 import { ensureDirSync } from 'fs-extra'
 
 /**
@@ -32,6 +32,7 @@ export async function getState(
     prettier?: boolean
     client: SupportedPackageManager
     encore?: boolean
+    dockerfile?: boolean
   }
 ): Promise<CliState> {
   /**
@@ -75,6 +76,17 @@ export async function getState(
       options.projectName = await getPrompt().ask('Enter the project name', {
         default: basename(absPath),
       })
+    } catch (_) {
+      process.exit(1)
+    }
+  }
+
+  /**
+   * Prompt for Docker
+   */
+  if (options.dockerfile === null) {
+    try {
+      options.dockerfile = await getPrompt().confirm('Setup dockerfile?')
     } catch (_) {
       process.exit(1)
     }
@@ -151,6 +163,7 @@ export async function getState(
     prettier: options.prettier!,
     client: options.client,
     encore: options.encore!,
+    dockerfile: options.dockerfile!,
     debug: !!options.debug,
   }
 }

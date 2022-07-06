@@ -12,7 +12,7 @@ import { removeSync } from 'fs-extra'
 import { Application } from '@adonisjs/application'
 import { utils, logger, tasksUi } from '@adonisjs/sink'
 
-import { tasks } from './Tasks'
+import { tasks } from './tasks'
 import { greet } from './src/Chalk/greet'
 import { showArt } from './src/Chalk/art'
 import { getHelp } from './src/Chalk/help'
@@ -29,12 +29,13 @@ export async function runTasks(args: string[]) {
    */
   const argv = getops(args, {
     string: ['boilerplate', 'name'],
-    boolean: ['eslint', 'debug', 'prettier', 'encore'],
+    boolean: ['eslint', 'debug', 'prettier', 'encore', 'dockerfile'],
     default: {
       eslint: null,
       debug: false,
       prettier: null,
       encore: null,
+      dockerfile: null,
     },
   })
 
@@ -65,6 +66,7 @@ export async function runTasks(args: string[]) {
     eslint: argv.eslint,
     prettier: argv.prettier,
     encore: argv.encore,
+    dockerfile: argv.dockerfile,
   })
 
   /**

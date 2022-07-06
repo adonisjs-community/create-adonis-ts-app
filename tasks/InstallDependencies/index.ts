@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-import { TaskFn } from '../../src/contracts'
+import { TaskFn } from '../../src/Contracts'
 import { getInstallMessage } from '../../src/Helpers'
-import { packages } from '../../src/Schematics/packages'
+import { packages } from '../../src/schematics/packages'
 
 /**
  * Creates the `package.json` file in the project root and installs

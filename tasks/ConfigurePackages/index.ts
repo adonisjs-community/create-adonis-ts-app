@@ -8,8 +8,8 @@
  */
 
 import { tasks } from '@adonisjs/sink'
-import { TaskFn } from '../../src/contracts'
-import { packages } from '../../src/Schematics/packages'
+import { TaskFn } from '../../src/Contracts'
+import { packages } from '../../src/schematics/packages'
 
 /**
  * Configure installed packages by running `node ace invoke instructions`

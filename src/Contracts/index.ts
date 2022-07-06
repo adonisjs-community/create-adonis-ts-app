@@ -33,5 +33,6 @@ export type CliState = {
   eslint: boolean
   prettier: boolean
   encore: boolean
+  dockerfile: boolean
   pkg: files.PackageJsonFile
 }

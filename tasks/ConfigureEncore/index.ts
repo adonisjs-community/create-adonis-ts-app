@@ -10,7 +10,7 @@
 import execa from 'execa'
 import { join } from 'path'
 import { files, logger as SinkLogger } from '@adonisjs/sink'
-import { TaskFn } from '../../src/contracts'
+import { TaskFn } from '../../src/Contracts'
 
 /**
  * Creates the CSS entrypoint

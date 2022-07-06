@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { CliState } from '../contracts'
+import { CliState } from '../Contracts'
 
 export const packages: {
   [K in CliState['boilerplate']]: {

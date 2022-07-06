@@ -10,6 +10,7 @@
 import formatSource from './FormatSource'
 import configureTests from './ConfigureTests'
 import setupEslint from './Scaffold/setupEslint'
+import setupDockerfile from './Scaffold/setupDockerfile'
 import generateManifest from './GenerateManifest'
 import createRcFile from './Scaffold/createRcFile'
 import configurePackages from './ConfigurePackages'
@@ -35,6 +36,7 @@ export const tasks = function ({ encore }: CliState) {
         createGitIgnore,
         createRcFile,
         createTsConfig,
+        setupDockerfile,
         setupEslint,
         setupPrettier,
       ],

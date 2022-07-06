@@ -8,7 +8,7 @@
  */
 
 import { instructions, logger } from '@adonisjs/sink'
-import { CliState } from '../contracts'
+import { CliState } from '../Contracts'
 
 /**
  * Greet post creation
