@@ -40,6 +40,9 @@ ${logger.colors.green('--prettier')} ${logger.colors.dim(
 ${logger.colors.green('--encore')} ${logger.colors.dim(
     '<boolean>'
   )}                ${logger.colors.dim('Enable/disable encore setup')}
+${logger.colors.green('--dockerfile')} ${logger.colors.dim(
+    '<boolean>'
+  )}            ${logger.colors.dim('Enable/disable dockerfile setup')}
 ${logger.colors.green('--debug')} ${logger.colors.dim(
     '<boolean>'
   )}                 ${logger.colors.dim('Turn on the debug mode')}`
