@@ -84,7 +84,7 @@ export async function getState(
   /**
    * Prompt for Docker
    */
-  if (options.dockerfile === null) {
+  if (options.dockerfile === null && packageManager !== 'pnpm') {
     try {
       options.dockerfile = await getPrompt().confirm('Setup dockerfile?')
     } catch (_) {

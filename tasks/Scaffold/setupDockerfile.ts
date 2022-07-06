@@ -3,7 +3,7 @@ import { files } from '@adonisjs/sink'
 import { TaskFn } from '../../src/Contracts'
 
 const task: TaskFn = (_, logger, { absPath, dockerfile, client }) => {
-  if (!dockerfile || client === 'pnpm') {
+  if (!dockerfile) {
     return
   }
 
