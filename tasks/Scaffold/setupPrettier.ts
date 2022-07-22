@@ -29,7 +29,6 @@ const task: TaskFn = (_, logger, { absPath, prettier, eslint, pkg }) => {
   pkg.set('prettier.bracketSpacing', true)
   pkg.set('prettier.arrowParens', 'always')
   pkg.set('prettier.printWidth', 100)
-  pkg.commit()
 
   /**
    * Create prettier ignore file
