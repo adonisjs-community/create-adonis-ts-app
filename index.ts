@@ -16,7 +16,7 @@ import { tasks } from './Tasks'
 import { greet } from './src/Chalk/greet'
 import { showArt } from './src/Chalk/art'
 import { getHelp } from './src/Chalk/help'
-import { getState, packageManager } from './src/Helpers'
+import { getState } from './src/Helpers'
 
 /**
  * Running all the tasks to create a new project.
@@ -42,7 +42,7 @@ export async function runTasks(args: string[]) {
    * Show help when no arguments are passed
    */
   if (!argv._.length) {
-    console.log(getHelp(packageManager))
+    console.log(getHelp(utils.getPackageManager(process.cwd())))
     return
   }
 
@@ -58,7 +58,7 @@ export async function runTasks(args: string[]) {
    * Setup state
    */
   const state = await getState(projectPath, {
-    client: packageManager,
+    client: utils.getPackageManager(projectPath),
     projectName: argv.name,
     debug: argv.debug,
     boilerplate: argv.boilerplate,

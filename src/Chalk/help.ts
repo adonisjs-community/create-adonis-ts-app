@@ -8,13 +8,12 @@
  */
 
 import { logger } from '@adonisjs/sink'
-import type { SupportedPackageManager } from '../Helpers'
 
 /**
  * Text to show on the help screen. Its simple and hence writing it
  * by hand is fine
  */
-export const getHelp = (packageManager: SupportedPackageManager) => {
+export const getHelp = (packageManager: 'npm' | 'pnpm' | 'yarn') => {
   const runSentence =
     packageManager === 'yarn'
       ? 'yarn create adonis-ts-app'

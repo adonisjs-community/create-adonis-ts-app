@@ -30,7 +30,7 @@ export async function getState(
     projectName?: string
     eslint?: boolean
     prettier?: boolean
-    client: SupportedPackageManager
+    client: 'npm' | 'pnpm' | 'yarn'
     encore?: boolean
   }
 ): Promise<CliState> {
@@ -196,15 +196,3 @@ export function getInstallMessage(list: string[]): string {
 
   return dependencies.join(', ')
 }
-
-export type SupportedPackageManager = typeof packageManager
-
-/**
- * Detect what package manager is in used, fallback to npm.
- */
-export const packageManager =
-  process.env.npm_execpath && process.env.npm_execpath.includes('yarn')
-    ? 'yarn'
-    : process.env.npm_execpath && process.env.npm_execpath.includes('pnpm')
-    ? 'pnpm'
-    : 'npm'
