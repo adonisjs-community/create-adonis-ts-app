@@ -47,6 +47,8 @@ const task: TaskFn = async (_, logger, { pkg, client, boilerplate, debug }) => {
   pkg.install('pino-pretty')
   pkg.install('adonis-preset-ts')
   pkg.install('@adonisjs/assembler')
+  pkg.install('@types/source-map-support')
+  pkg.install('@types/proxy-addr')
 
   /**
    * Displaying a spinner, since install packages takes
