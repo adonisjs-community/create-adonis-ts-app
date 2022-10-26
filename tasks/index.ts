@@ -19,13 +19,13 @@ import createTsConfig from './Scaffold/createTsConfig'
 import installDependencies from './InstallDependencies'
 import createGitIgnore from './Scaffold/createGitIgnore'
 import createEditorConfig from './Scaffold/createEditorConfig'
-import configureWebpackEncore from './ConfigureEncore'
+import configureBundler from './ConfigureBundler'
 import { CliState } from '../src/Contracts'
 
 /**
  * An array of tasks to be executed in chronological order
  */
-export const tasks = function ({ encore }: CliState) {
+export const tasks = function ({ bundler }: CliState) {
   return [
     {
       title: 'Scaffold project',
@@ -47,11 +47,11 @@ export const tasks = function ({ encore }: CliState) {
       title: 'Configure installed packages',
       actions: [configurePackages, configureTests, generateManifest, formatSource],
     },
-    ...(encore
+    ...(bundler
       ? [
           {
-            title: 'Configure webpack encore',
-            actions: [configureWebpackEncore],
+            title: 'Configure Assets Manager',
+            actions: [configureBundler],
           },
         ]
       : []),

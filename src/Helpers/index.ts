@@ -31,7 +31,7 @@ export async function getState(
     eslint?: boolean
     prettier?: boolean
     client: 'npm' | 'pnpm' | 'yarn'
-    encore?: boolean
+    bundler?: 'vite' | 'encore'
   }
 ): Promise<CliState> {
   /**
@@ -103,15 +103,16 @@ export async function getState(
   }
 
   /**
-   * Prompt for Webpack encore. We only do it during the web
-   * boilerplate. For others, a user can define it using
+   * Prompt for selecting the assets bundler. We only do it during
+   * the web boilerplate. For others, a user can define it using
    * the flag
    */
-  if (options.encore === null && options.boilerplate === 'web') {
+  if (options.bundler === null && options.boilerplate === 'web') {
     try {
-      options.encore = await getPrompt().confirm(
-        'Configure webpack encore for compiling frontend assets?'
-      )
+      options.bundler = await getPrompt().choice('Select the assets manager', [
+        { name: 'vite', message: 'Vite' },
+        { name: 'encore', message: 'Webpack Encore' },
+      ])
     } catch (_) {
       process.exit(1)
     }
@@ -139,7 +140,7 @@ export async function getState(
   process.env['ADONIS_CREATE_PRETTIER'] = String(options.prettier)
   process.env['ADONIS_CREATE_APP_CLIENT'] = options.client
   process.env['ADONIS_CREATE_APP_BOILERPLATE'] = options.boilerplate
-  process.env['ADONIS_CREATE_APP_ENCORE'] = String(options.encore)
+  process.env['ADONIS_CREATE_APP_BUNDLER'] = String(options.bundler)
 
   return {
     baseName: projectRoot,
@@ -150,7 +151,7 @@ export async function getState(
     eslint: options.eslint!,
     prettier: options.prettier!,
     client: options.client,
-    encore: options.encore!,
+    bundler: options.bundler!,
     debug: !!options.debug,
   }
 }

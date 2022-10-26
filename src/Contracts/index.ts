@@ -31,6 +31,6 @@ export type CliState = {
   projectName: string
   eslint: boolean
   prettier: boolean
-  encore: boolean
+  bundler: 'vite' | 'encore'
   pkg: files.PackageJsonFile
 }

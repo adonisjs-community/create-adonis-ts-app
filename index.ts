@@ -29,12 +29,12 @@ export async function runTasks(args: string[]) {
    */
   const argv = getops(args, {
     string: ['boilerplate', 'name'],
-    boolean: ['eslint', 'debug', 'prettier', 'encore'],
+    boolean: ['eslint', 'debug', 'prettier', 'bundler'],
     default: {
       eslint: null,
       debug: false,
       prettier: null,
-      encore: null,
+      bundler: null,
     },
   })
 
@@ -64,7 +64,7 @@ export async function runTasks(args: string[]) {
     boilerplate: argv.boilerplate,
     eslint: argv.eslint,
     prettier: argv.prettier,
-    encore: argv.encore,
+    bundler: argv.bundler,
   })
 
   /**

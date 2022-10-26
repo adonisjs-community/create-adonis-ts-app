@@ -58,7 +58,7 @@ Options
 --name <string>                   Specify application name
 --eslint <boolean>                Enable/disable eslint setup
 --prettier <boolean>              Enable/disable prettier setup
---encore <boolean>                Enable/disable encore setup
+--bundler [vite, encore]          Enable/disable assets manager setup
 --debug <boolean>                 Turn on the debug mode
 ```
 
@@ -94,12 +94,13 @@ Configure prettier
 npm init adonis-ts-app hello-world -- --prettier
 ```
 
-#### encore
+#### bundler
 
-Configure encore
+Configure assets manager
 
 ```sh
-npm init adonis-ts-app hello-world -- --encore
+npm init adonis-ts-app hello-world -- --bundler=vite
+npm init adonis-ts-app hello-world -- --bundler=encore
 ```
 
 #### debug

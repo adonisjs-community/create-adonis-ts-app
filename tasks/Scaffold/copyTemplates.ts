@@ -31,7 +31,14 @@ const task: TaskFn = (_, logger, state) => {
 
     const outputFileName = name.replace(/\.txt$/, '.ts')
     const src = join(baseDir, name)
-    new files.MustacheFile(state.absPath, outputFileName, src).apply(state).commit()
+
+    new files.MustacheFile(state.absPath, outputFileName, src)
+      .apply({
+        ...state,
+        encore: state.bundler === 'encore',
+        vite: state.bundler === 'vite',
+      })
+      .commit()
     logger.action('create').succeeded(outputFileName)
   })
 }
