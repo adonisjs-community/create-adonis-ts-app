@@ -140,7 +140,8 @@ export async function getState(
   process.env['ADONIS_CREATE_PRETTIER'] = String(options.prettier)
   process.env['ADONIS_CREATE_APP_CLIENT'] = options.client
   process.env['ADONIS_CREATE_APP_BOILERPLATE'] = options.boilerplate
-  process.env['ADONIS_CREATE_APP_BUNDLER'] = String(options.bundler)
+  process.env['ADONIS_CREATE_APP_ENCORE'] = String(options.bundler === 'encore')
+  process.env['ADONIS_CREATE_APP_VITE'] = String(options.bundler === 'vite')
 
   return {
     baseName: projectRoot,
