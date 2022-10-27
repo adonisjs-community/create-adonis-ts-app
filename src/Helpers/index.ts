@@ -109,10 +109,13 @@ export async function getState(
    */
   if (options.bundler === null && options.boilerplate === 'web') {
     try {
-      options.bundler = await getPrompt().choice('Select the assets manager', [
+      const choice = await getPrompt().choice('Select the assets manager', [
+        { name: 'none', message: 'None' },
         { name: 'vite', message: 'Vite' },
         { name: 'encore', message: 'Webpack Encore' },
       ])
+
+      options.bundler = choice === 'none' ? undefined : choice
     } catch (_) {
       process.exit(1)
     }
