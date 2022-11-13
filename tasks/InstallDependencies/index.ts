@@ -37,6 +37,7 @@ const task: TaskFn = async (_, logger, { pkg, client, boilerplate, debug }) => {
   pkg.install('proxy-addr', 'latest', false)
   pkg.install('reflect-metadata', 'latest', false)
   pkg.install('source-map-support', 'latest', false)
+  pkg.install('pino-pretty', 'latest', false)
 
   /**
    * Required dev dependencies
@@ -44,7 +45,6 @@ const task: TaskFn = async (_, logger, { pkg, client, boilerplate, debug }) => {
   pkg.install('typescript', '~4.6')
   pkg.install('youch')
   pkg.install('youch-terminal')
-  pkg.install('pino-pretty')
   pkg.install('adonis-preset-ts')
   pkg.install('@adonisjs/assembler')
   pkg.install('@types/source-map-support')
