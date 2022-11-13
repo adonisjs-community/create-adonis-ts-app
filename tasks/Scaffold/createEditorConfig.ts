@@ -16,6 +16,10 @@ import { TaskFn } from '../../src/contracts'
 const task: TaskFn = (_, logger, { absPath }) => {
   const editorConfig = new files.IniFile(absPath, '.editorconfig')
 
+  editorConfig.set('_global', {
+    root: true,
+  })
+
   /**
    * All files
    */
@@ -32,7 +36,7 @@ const task: TaskFn = (_, logger, { absPath }) => {
    * JSON file
    */
   editorConfig.set('*.json', {
-    insert_final_newline: 'ignore',
+    insert_final_newline: false,
   })
 
   /**
