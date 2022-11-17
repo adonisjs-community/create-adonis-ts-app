@@ -49,7 +49,7 @@ const task: TaskFn = async (_, logger, { absPath, debug, pkg }) => {
     )
   }
   
-  pkg.install('@symfony/webpack-encore@3.1.0')
+  pkg.install('@symfony/webpack-encore', '~3.1.0')
 
   try {
     await execa('node', ['ace', 'configure', 'encore'], {
