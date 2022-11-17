@@ -41,13 +41,15 @@ function createJsEntryPoint(absPath: string, logger: typeof SinkLogger) {
 /**
  * Setup webpack encore inside the project
  */
-const task: TaskFn = async (_, logger, { absPath, debug }) => {
+const task: TaskFn = async (_, logger, { absPath, debug, pkg }) => {
   let spinner: ReturnType<typeof logger.await> | undefined
   if (!debug) {
     spinner = logger.await(
       `installing @symfony/webpack-core ${logger.colors.yellow('(usually takes longer)')}`
     )
   }
+  
+  pkg.install('@symfony/webpack-encore@3.1.0')
 
   try {
     await execa('node', ['ace', 'configure', 'encore'], {
