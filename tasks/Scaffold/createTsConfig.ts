@@ -37,6 +37,7 @@ const task: TaskFn = (_, logger, { absPath }) => {
   tsconfig.set('compilerOptions', {
     outDir: 'build',
     rootDir: './',
+    baseUrl: './',
     sourceMap: true,
     paths: {
       'App/*': ['./app/*'],
