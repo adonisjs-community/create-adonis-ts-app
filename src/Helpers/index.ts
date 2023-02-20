@@ -129,6 +129,7 @@ export async function getState(
   pkg.setScript('dev', 'node ace serve --watch')
   pkg.setScript('build', 'node ace build --production')
   pkg.setScript('start', 'node server.js')
+  pkg.setScript('test', 'node ace test')
 
   /**
    * Set environment variables that can be used by the packages
