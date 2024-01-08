@@ -46,7 +46,7 @@ const task: TaskFn = async (_, logger, { pkg, client, boilerplate, debug }) => {
   pkg.install('youch-terminal')
   pkg.install('pino-pretty')
   pkg.install('adonis-preset-ts')
-  pkg.install('@adonisjs/assembler')
+  pkg.install('@adonisjs/assembler@5.9.5')
   pkg.install('@types/source-map-support')
   pkg.install('@types/proxy-addr')
 
