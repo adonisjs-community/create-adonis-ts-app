@@ -11,7 +11,7 @@ import cliWidth from 'cli-width'
 import { isAbsolute, join, basename } from 'path'
 import { files, getPrompt } from '@adonisjs/sink'
 
-import { CliState } from '../contracts'
+import { CliState } from '../Contracts'
 import { ensureDirSync } from 'fs-extra'
 
 /**

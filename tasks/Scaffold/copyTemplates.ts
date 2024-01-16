@@ -11,7 +11,7 @@ import { join } from 'path'
 import { utils, files } from '@adonisjs/sink'
 import { fsReadAll } from '@poppinss/utils/build/helpers'
 
-import { TaskFn } from '../../src/contracts'
+import { TaskFn } from '../../src/Contracts'
 
 /**
  * Copy boilerplate files to the destination

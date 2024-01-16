@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-import { TaskFn } from '../../src/contracts'
+import { TaskFn } from '../../src/Contracts'
 
 /**
  * Setup eslint inside the project

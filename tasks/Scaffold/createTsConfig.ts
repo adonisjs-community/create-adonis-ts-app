@@ -8,7 +8,7 @@
  */
 
 import { files } from '@adonisjs/sink'
-import { TaskFn } from '../../src/contracts'
+import { TaskFn } from '../../src/Contracts'
 
 /**
  * Creates `tsconfig.json` file inside destination

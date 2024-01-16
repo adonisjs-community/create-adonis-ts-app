@@ -12,7 +12,7 @@ import { removeSync } from 'fs-extra'
 import { Application } from '@adonisjs/application'
 import { utils, logger, tasksUi } from '@adonisjs/sink'
 
-import { tasks } from './Tasks'
+import { tasks } from './tasks'
 import { greet } from './src/Chalk/greet'
 import { showArt } from './src/Chalk/art'
 import { getHelp } from './src/Chalk/help'

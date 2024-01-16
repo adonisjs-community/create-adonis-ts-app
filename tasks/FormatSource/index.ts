@@ -8,7 +8,7 @@
  */
 
 import execa from 'execa'
-import { TaskFn } from '../../src/contracts'
+import { TaskFn } from '../../src/Contracts'
 
 /**
  * Format source files using prettier
